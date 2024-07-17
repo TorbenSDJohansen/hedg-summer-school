@@ -13,14 +13,12 @@ class HISCOClassifier(nn.Module):
 
         self.embedding = nn.Embedding(vocab_size, hidden_size)
         self.gru = nn.GRU(hidden_size, hidden_size, batch_first=True)
-        self.dropout = nn.Dropout(0.2)
         self.classifier = nn.Linear(hidden_size, 1919)
 
     def forward(self, input_seq: Tensor) -> Tensor:
         out = self.embedding(input_seq)
         out, _ = self.gru(out)
         out = out[:, -1, :]
-        out = self.dropout(out)
         out = self.classifier(out)
 
         return out
