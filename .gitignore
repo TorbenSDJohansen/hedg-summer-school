@@ -165,6 +165,6 @@ figs/
 .Rproj.user
 Figures/kaggle_survey_2022_responses.csv
 hedg-summer-school.Rproj
-.virtual_documents
+.virtual_documents/
 Exercise_solutions/
-.virtual_documents/Exercise-off-the-shelf-models.ipynb
+.Rhistory
