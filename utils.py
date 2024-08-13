@@ -1,13 +1,14 @@
 from PIL import Image, ImageDraw, ImageFont
 import matplotlib.pyplot as plt
 
-def draw_picture(results, picture_path, figsize=(12, 8), font_size=24):
+def draw_picture(results, picture_path, save_path=None, figsize=(12, 8), font_size=24):
     """
-    Draw bounding boxes and labels on the image and display it.
+    Draw bounding boxes and labels on the image, display it, and optionally save it.
 
     Parameters:
     - results (list): Detection results containing score, label, and bounding box coordinates.
     - picture_path (str): Path to the image file.
+    - save_path (str): Path to save the image file with bounding boxes and labels. If None, the image will not be saved.
     - figsize (tuple): Size of the figure (width, height) in inches.
     - font_size (int): Size of the font for labels.
     """
@@ -48,3 +49,11 @@ def draw_picture(results, picture_path, figsize=(12, 8), font_size=24):
     plt.imshow(image)
     plt.axis('off')  # Turn off axis
     plt.show()
+
+    # Save the image if a save path is provided
+    if save_path:
+        image.save(save_path)
+
+
+def print_ner(x):
+    [print(f"{i['entity']}: {i['word']}; Probability: {i['score']:.3f}") for i in x]
