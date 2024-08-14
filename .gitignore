@@ -160,5 +160,10 @@ cython_debug/
 #.idea/
 
 dirs.py
-figs/
 .vector_cache/
+.Rproj.user
+Figures/kaggle_survey_2022_responses.csv
+hedg-summer-school.Rproj
+.virtual_documents/
+Exercise_solutions/
+.Rhistory
