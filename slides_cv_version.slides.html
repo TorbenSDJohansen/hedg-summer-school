@@ -6,7 +6,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <title>slides_cv_version slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
-  import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs';
+  import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.0/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
 <!-- General and theme style sheets -->
@@ -7629,7 +7629,7 @@ Assistant Professor of Economic History
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
@@ -7652,6 +7652,17 @@ Assistant Professor of Economic History
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>c:\Users\tsdj\.conda\envs\hedg-summer-school\Lib\site-packages\torch\_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Hardware accelerator e.g. GPU is available in the environment, but no `device` argument is passed to the `Pipeline` object. Model will be on CPU.
+c:\Users\tsdj\.conda\envs\hedg-summer-school\Lib\site-packages\transformers\generation\utils.py:1249: UserWarning: Using the model-agnostic default `max_length` (=20) to control the generation length. We recommend setting `max_new_tokens` to control the maximum length of the generation.
+  warnings.warn(
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>[{'generated_text': 'two men sitting on a chair in front of a wall'}]
 </pre>
@@ -7670,12 +7681,12 @@ Assistant Professor of Economic History
 </div>
 </div>
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=41b48626">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=41b48626">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
@@ -7684,6 +7695,22 @@ Assistant Professor of Economic History
 <span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="s2">"Figures/arkivdk7055378.png"</span><span class="p">)</span>
 <span class="c1"># ... add a bit of code to draw the objects found</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>Some weights of the model checkpoint at facebook/detr-resnet-50 were not used when initializing DetrForObjectDetection: ['model.backbone.conv_encoder.model.layer1.0.downsample.1.num_batches_tracked', 'model.backbone.conv_encoder.model.layer2.0.downsample.1.num_batches_tracked', 'model.backbone.conv_encoder.model.layer3.0.downsample.1.num_batches_tracked', 'model.backbone.conv_encoder.model.layer4.0.downsample.1.num_batches_tracked']
+- This IS expected if you are initializing DetrForObjectDetection from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing DetrForObjectDetection from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Hardware accelerator e.g. GPU is available in the environment, but no `device` argument is passed to the `Pipeline` object. Model will be on CPU.
+</pre>
 </div>
 </div>
 </div>
@@ -7783,7 +7810,7 @@ Assistant Professor of Economic History
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
@@ -7804,6 +7831,13 @@ Assistant Professor of Economic History
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>Hardware accelerator e.g. GPU is available in the environment, but no `device` argument is passed to the `Pipeline` object. Model will be on CPU.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>[{'label': 'POSITIVE', 'score': 0.9997534155845642}]
 </pre>
@@ -7822,12 +7856,12 @@ Assistant Professor of Economic History
 </div>
 </div>
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=f7360858">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f7360858">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
@@ -7846,12 +7880,28 @@ Assistant Professor of Economic History
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>Some weights of the model checkpoint at dslim/bert-base-NER were not used when initializing BertForTokenClassification: ['bert.pooler.dense.bias', 'bert.pooler.dense.weight']
+- This IS expected if you are initializing BertForTokenClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertForTokenClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Hardware accelerator e.g. GPU is available in the environment, but no `device` argument is passed to the `Pipeline` object. Model will be on CPU.
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=240894ee">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">print_ner</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="c1"># Custom function to print</span>
@@ -7894,7 +7944,7 @@ I-ORG: College; Probability: 0.997
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
@@ -7918,6 +7968,13 @@ I-ORG: College; Probability: 0.997
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>Hardware accelerator e.g. GPU is available in the environment, but no `device` argument is passed to the `Pipeline` object. Model will be on CPU.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Translated Text: Bonjour, aimez-vous l'apprentissage automatique et l'histoire économique ?
 </pre>
@@ -7936,20 +7993,48 @@ I-ORG: College; Probability: 0.997
 </div>
 </div>
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=796b5885">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=796b5885">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">task</span> <span class="o">=</span> <span class="s2">"text-generation"</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="s1">'HuggingFaceH4/zephyr-7b-beta'</span><span class="p">,</span> <span class="n">torch_dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bfloat16</span><span class="p">,</span> <span class="n">device_map</span><span class="o">=</span><span class="s1">'auto'</span><span class="p">)</span> <span class="c1"># facebook/opt-125m</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="s2">"The technical aspects of economic history"</span><span class="p">,</span> <span class="n">max_length</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="s2">"text-generation"</span><span class="p">,</span> 
+    <span class="n">model</span> <span class="o">=</span> <span class="s1">'HuggingFaceH4/zephyr-7b-beta'</span><span class="p">,</span> 
+    <span class="n">torch_dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bfloat16</span><span class="p">,</span> 
+    <span class="n">device_map</span><span class="o">=</span><span class="s1">'auto'</span><span class="p">,</span>
+    <span class="p">)</span> <span class="c1"># facebook/opt-125m</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span>
+    <span class="s2">"The technical aspects of economic history"</span><span class="p">,</span> 
+    <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> 
+    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Loading checkpoint shards:   0%|          | 0/8 [00:00&lt;?, ?it/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>Some parameters are on the meta device device because they were offloaded to the cpu.
+</pre>
 </div>
 </div>
 </div>
@@ -7959,7 +8044,7 @@ I-ORG: College; Probability: 0.997
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [36]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -7975,7 +8060,7 @@ I-ORG: College; Probability: 0.997
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>{'translation_text': "Bonjour, aimez-vous l'apprentissage automatique et l'histoire économique ?"}
+<pre>[{'generated_text': 'The technical aspects of economic history, such as the study of prices, wages, and interest rates, are also important in understanding the economic development of a region.\n\nIn summary, economic history is a multidisciplinary field that combines'}]
 </pre>
 </div>
 </div>
@@ -7997,7 +8082,7 @@ I-ORG: College; Probability: 0.997
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
@@ -8034,7 +8119,7 @@ I-ORG: College; Probability: 0.997
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">])</span>
@@ -8051,11 +8136,22 @@ I-ORG: College; Probability: 0.997
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>&lt;|system|&gt;
-You are a friendly econometrician who's interested in advanced statistical techniques for Economic History. You want people to understand the importance of advanced methods.&lt;/s&gt;
+
+        You are a friendly econometrician who's interested in advanced 
+        statistical techniques for Economic History. You want people to 
+        understand the importance of advanced methods.
+        &lt;/s&gt;
 &lt;|user|&gt;
-Can we do good economic history research without all the technicalities?&lt;/s&gt;
+"
+        Can we do good economic history research without all the 
+        technicalities?
+        &lt;/s&gt;
 &lt;|assistant|&gt;
-While advanced statistical techniques can provide more precise and accurate results, it's possible to conduct economic history research without using all the technicalities. Simple statistical methods and qualitative approaches can also be effective in answering historical questions. The choice of method depends on the nature of the research question and the availability of data. However, it's important to recognize that advanced methods can help to address complex issues and provide more insightful results, particularly when working with large and complex datasets. Therefore, it's beneficial to have a basic understanding of advanced statistical techniques and to consider their potential utility in economic history research. Ultimately, the goal is to
+While it's true that some economic history research can be done with simpler statistical methods, advanced techniques offer several benefits that can enhance the accuracy and reliability of historical analyses. Here are a few reasons why advanced methods are important:
+
+1. Dealing with complex data: Historical data can be messy and incomplete, with missing values, outliers, and other irregularities. Advanced statistical techniques, such as time-series analysis, panel data models, and Bayesian methods, can help econometricians handle these challenges and draw more reliable conclusions.
+
+2. Accounting for structural changes: Historical economies
 </pre>
 </div>
 </div>
@@ -8073,7 +8169,6 @@ While advanced statistical techniques can provide more precise and accurate resu
 <li>Go to to <a href="https://colab.research.google.com/drive/1YmzV2A40B3KsnTycavg2I9IxLk4DS1g-?usp=sharing">colab.research.google.com/drive/1YmzV2A40B3KsnTycavg2I9IxLk4DS1g-?usp=sharing</a></li>
 <li>Copy the notebook and do the exercises</li>
 </ul>
-<h1 id="CHECK-IF-COPYING-WORKS!!">CHECK IF COPYING WORKS!!<a class="anchor-link" href="#CHECK-IF-COPYING-WORKS!!">¶</a></h1>
 </div>
 </div>
 </div>
@@ -8094,7 +8189,7 @@ While advanced statistical techniques can provide more precise and accurate resu
 <li>Document classification</li>
 <li>Segmentations</li>
 <li>Handwritten text recognition</li>
-<li>Application: Copenhagen Infant Health Visitor Recrods</li>
+<li>Application: Copenhagen Infant Health Visitor Records</li>
 </ol>
 </div>
 </div>
@@ -8128,7 +8223,7 @@ While advanced statistical techniques can provide more precise and accurate resu
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">tokenization_dict</span> <span class="o">=</span> <span class="p">{</span>
@@ -8177,7 +8272,7 @@ While advanced statistical techniques can provide more precise and accurate resu
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
@@ -8234,7 +8329,7 @@ While advanced statistical techniques can provide more precise and accurate resu
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">betas</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
@@ -8250,7 +8345,7 @@ While advanced statistical techniques can provide more precise and accurate resu
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>tensor([1, 2, 3, 5, 1, 9])</pre>
 </div>
@@ -8284,7 +8379,7 @@ While advanced statistical techniques can provide more precise and accurate resu
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">betas_lookup</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">tokenization_dict</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">betas</span><span class="p">))</span>
@@ -8299,7 +8394,7 @@ While advanced statistical techniques can provide more precise and accurate resu
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>tensor([1, 2, 3, 5, 1, 9])</pre>
 </div>
@@ -8324,10 +8419,10 @@ While advanced statistical techniques can provide more precise and accurate resu
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Text-embeddings">Text embeddings<a class="anchor-link" href="#Text-embeddings">¶</a></h1><p>One-hot encoding is <em>sparse</em>.
+<h1 id="Text-embeddings">Text embeddings<a class="anchor-link" href="#Text-embeddings">¶</a></h1><p>One-hot encoding is <em>sparse</em>. 
 This is particularly true if there are many classes, and working with language, over 100,000 classes is not uncommon</p>
-<p>However, words are <em>related</em>, and we can often store them much more efficiently.
-Embedding is one such way, in which a sparse vector is transformed to a (often much lower dimensional) non-sparse/dense vector.
+<p>However, words are <em>related</em>, and we can often store them much more efficiently. 
+Embedding is one such way, in which a sparse vector is transformed to a (often much lower dimensional) non-sparse/dense vector. 
 In this more dense space, we often see that words such as "father" and "mother" might be closer to each other than to "Italy"</p>
 <p>For a problem with n words (or tokens, in the general case) and an embedding dimension k, the embedding function is a function $f: \{0, 1\}^n \rightarrow \mathbb{R}^k$</p>
 <p>As such, an embedding is "just" a lookup table, "looking up" <em>k</em> real numbers for each word</p>
@@ -8350,7 +8445,7 @@ In this more dense space, we often see that words such as "father" and "mother" 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">tokenization_dict</span>
@@ -8364,7 +8459,7 @@ In this more dense space, we often see that words such as "father" and "mother" 
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>{'the': 0, 'cat': 1, 'sat': 2, 'on': 3, 'mat': 4}</pre>
 </div>
@@ -8387,7 +8482,7 @@ In this more dense space, we often see that words such as "father" and "mother" 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -8420,7 +8515,7 @@ In this more dense space, we often see that words such as "father" and "mother" 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">embedding_lookup</span><span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokenized_text</span><span class="p">])</span>
@@ -8434,7 +8529,7 @@ In this more dense space, we often see that words such as "father" and "mother" 
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>array([[ 0.5,  0.1],
        [ 0.3,  0.9],
@@ -8475,7 +8570,7 @@ Let's take a look at some 50-dimensional vector representations of 400,000 words
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torchtext</span>
@@ -8502,7 +8597,7 @@ Let's take a look at some 50-dimensional vector representations of 400,000 words
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span><span class="p">[</span><span class="n">vocab</span><span class="o">.</span><span class="n">stoi</span><span class="p">[</span><span class="s1">'father'</span><span class="p">]][:</span><span class="mi">5</span><span class="p">]</span>
@@ -8516,7 +8611,7 @@ Let's take a look at some 50-dimensional vector representations of 400,000 words
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[21]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>tensor([ 0.0955,  0.7042, -0.4078, -0.8084,  1.2560])</pre>
 </div>
@@ -8528,7 +8623,7 @@ Let's take a look at some 50-dimensional vector representations of 400,000 words
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span><span class="p">[</span><span class="n">vocab</span><span class="o">.</span><span class="n">stoi</span><span class="p">[</span><span class="s1">'mother'</span><span class="p">]][:</span><span class="mi">5</span><span class="p">]</span>
@@ -8542,7 +8637,7 @@ Let's take a look at some 50-dimensional vector representations of 400,000 words
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[22]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>tensor([ 0.4336,  1.0727, -0.6196, -0.8068,  1.2519])</pre>
 </div>
@@ -8566,7 +8661,7 @@ Let us see this is practice</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">embedding_father</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span><span class="p">[</span><span class="n">vocab</span><span class="o">.</span><span class="n">stoi</span><span class="p">[</span><span class="s1">'father'</span><span class="p">]]</span>
@@ -8585,7 +8680,7 @@ Let us see this is practice</p>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>tensor([ 0.0084,  0.9224, -0.8176, -0.8477,  1.1528])</pre>
 </div>
@@ -8608,7 +8703,7 @@ Let us see this is practice</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">distances</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span> <span class="o">-</span> <span class="n">qvec</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -8625,7 +8720,7 @@ Let us see this is practice</p>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>'mother'</pre>
 </div>
@@ -8653,7 +8748,7 @@ In this example, I will do this using <a href="https://lvdmaaten.github.io/publi
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
@@ -8689,7 +8784,7 @@ In this example, I will do this using <a href="https://lvdmaaten.github.io/publi
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># 2d t-SNE embeddings for 10,000 most common "words" (tokens)</span>
@@ -8705,7 +8800,7 @@ In this example, I will do this using <a href="https://lvdmaaten.github.io/publi
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">tsne_embeddings_s</span><span class="p">[</span><span class="n">vocab</span><span class="o">.</span><span class="n">stoi</span><span class="p">[</span><span class="s1">'father'</span><span class="p">]]</span>
@@ -8719,7 +8814,7 @@ In this example, I will do this using <a href="https://lvdmaaten.github.io/publi
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[27]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>array([0.6783404 , 0.73474777], dtype=float32)</pre>
 </div>
@@ -8731,7 +8826,7 @@ In this example, I will do this using <a href="https://lvdmaaten.github.io/publi
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">tsne_embeddings_s</span><span class="p">[</span><span class="n">vocab</span><span class="o">.</span><span class="n">stoi</span><span class="p">[</span><span class="s1">'mother'</span><span class="p">]]</span>
@@ -8745,7 +8840,7 @@ In this example, I will do this using <a href="https://lvdmaaten.github.io/publi
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[28]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>array([0.6711474 , 0.74132395], dtype=float32)</pre>
 </div>
@@ -8876,7 +8971,7 @@ Let us see this is practice</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">embedding_son</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span><span class="p">[</span><span class="n">vocab</span><span class="o">.</span><span class="n">stoi</span><span class="p">[</span><span class="s1">'son'</span><span class="p">]]</span>
@@ -8895,7 +8990,7 @@ Let us see this is practice</p>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>tensor([ 0.1900,  1.1960, -0.5546, -0.5261,  1.0682])</pre>
 </div>
@@ -8918,7 +9013,7 @@ Let us see this is practice</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">distances</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span> <span class="o">-</span> <span class="n">qvec</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -8935,7 +9030,7 @@ Let us see this is practice</p>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[30]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>'daughter'</pre>
 </div>
@@ -9013,7 +9108,7 @@ Let us see this is practice</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">embedding_paris</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span><span class="p">[</span><span class="n">vocab</span><span class="o">.</span><span class="n">stoi</span><span class="p">[</span><span class="s1">'paris'</span><span class="p">]]</span>
@@ -9032,7 +9127,7 @@ Let us see this is practice</p>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[19]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[31]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>tensor([ 1.8746,  0.1050, -1.0362,  0.2511,  0.2243])</pre>
 </div>
@@ -9055,7 +9150,7 @@ Let us see this is practice</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">distances</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">vocab</span><span class="o">.</span><span class="n">vectors</span> <span class="o">-</span> <span class="n">qvec</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -9072,7 +9167,7 @@ Let us see this is practice</p>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[32]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>'rome'</pre>
 </div>
@@ -9086,7 +9181,7 @@ Let us see this is practice</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Neural-networks-for-text">Neural networks for text<a class="anchor-link" href="#Neural-networks-for-text">¶</a></h1><p>We now know how to represent text as numerical data suitable for modelling.
+<h1 id="Neural-networks-for-text">Neural networks for text<a class="anchor-link" href="#Neural-networks-for-text">¶</a></h1><p>We now know how to represent text as numerical data suitable for modelling. 
 Our next objective is to learn <em>how</em> to model text data</p>
 <p>One key observation is that text is somewhat similar to time series data, in that a clear <em>sequential</em> structure is present: The meaning of a word depends on its context, i.e., how it is embedded in a sentence</p>
 <p>Modern approaches roughly falls into one of two categories</p>
@@ -9105,13 +9200,13 @@ Our next objective is to learn <em>how</em> to model text data</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="A-recurrent-cell-of-a-neural-network">A recurrent cell of a neural network<a class="anchor-link" href="#A-recurrent-cell-of-a-neural-network">¶</a></h3><p><img alt="Drawing" src="./figs/figure_6-9.png" style="width: 400px;">
-Source: Deep Learning with Python by Francois Collet (ISBN10: 9781617294433)</img></p>
+<h3 id="A-recurrent-cell-of-a-neural-network">A recurrent cell of a neural network<a class="anchor-link" href="#A-recurrent-cell-of-a-neural-network">¶</a></h3><img alt="Drawing" src="./figs/figure_6-9.png" style="width: 400px;">
+Source: Deep Learning with Python by Francois Collet (ISBN10: 9781617294433)
 <p>We have not yet specified the type of recurrent connection, just that it has form</p>
 <p>$y_t = f(x_t, y_{t - 1})$</p>
 <p>We can think about an autoregressive linear model with covariates as one example</p>
 <p>$y_t = \alpha y_{t - 1} + \beta f_t$</p>
-</div>
+</img></div>
 </div>
 </div>
 </div></section><section>
@@ -9122,9 +9217,10 @@ Source: Deep Learning with Python by Francois Collet (ISBN10: 9781617294433)</im
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Recurrent-cells-and-unfolding">Recurrent cells and unfolding<a class="anchor-link" href="#Recurrent-cells-and-unfolding">¶</a></h3><p>Usually, a recurrent neural network looks something like the image below - i.e., it has a "loop" where it feeds into itself (left). This can then be "unfolded" (right), in which way it looks more like a regular network, with an additional input and output ("hidden states").</p>
-<p><img alt="Drawing" src="./figs/Recurrent_neural_network_unfold.svg" style="width: 600px;">
-Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/w/index.php?curid=60109157">https://commons.wikimedia.org/w/index.php?curid=60109157</a>"</img></p>
-</div>
+<img alt="Drawing" src="./figs/Recurrent_neural_network_unfold.svg" style="width: 600px;">
+Source: "fdeloche - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=60109157"
+
+</img></div>
 </div>
 </div>
 </div></section></section><section><section>
@@ -9152,9 +9248,10 @@ Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.o
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Long-Short-Term-Memory-(LSTM)">Long Short-Term Memory (LSTM)<a class="anchor-link" href="#Long-Short-Term-Memory-(LSTM)">¶</a></h3><p><img alt="Drawing" src="./figs/Long_Short-Term_Memory.svg" style="width: 800px;">
-Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/w/index.php?curid=60149410">https://commons.wikimedia.org/w/index.php?curid=60149410</a>"</img></p>
-</div>
+<h3 id="Long-Short-Term-Memory-(LSTM)">Long Short-Term Memory (LSTM)<a class="anchor-link" href="#Long-Short-Term-Memory-(LSTM)">¶</a></h3><img alt="Drawing" src="./figs/Long_Short-Term_Memory.svg" style="width: 800px;">
+Source: "fdeloche - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=60149410"
+
+</img></div>
 </div>
 </div>
 </div></section></section><section><section>
@@ -9164,9 +9261,10 @@ Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.o
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Gated-Recurrent-Unit-(GRU)">Gated Recurrent Unit (GRU)<a class="anchor-link" href="#Gated-Recurrent-Unit-(GRU)">¶</a></h3><p><img alt="Drawing" src="./figs/Gated_Recurrent_Unit.svg" style="width: 800px;">
-Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/w/index.php?curid=60466441">https://commons.wikimedia.org/w/index.php?curid=60466441</a>"</img></p>
-</div>
+<h3 id="Gated-Recurrent-Unit-(GRU)">Gated Recurrent Unit (GRU)<a class="anchor-link" href="#Gated-Recurrent-Unit-(GRU)">¶</a></h3><img alt="Drawing" src="./figs/Gated_Recurrent_Unit.svg" style="width: 800px;">
+Source: "fdeloche - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=60466441"
+
+</img></div>
 </div>
 </div>
 </div></section></section><section><section>
@@ -9204,8 +9302,8 @@ Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.o
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="OccCANINE-to-the-rescue!"><em>OccCANINE</em> to the rescue!<a class="anchor-link" href="#OccCANINE-to-the-rescue!">¶</a></h2><img alt="Architecture small" height="300" src="Figures/Architecture_small.png"/>
-</div>
+<h2 id="OccCANINE-to-the-rescue!"><em>OccCANINE</em> to the rescue!<a class="anchor-link" href="#OccCANINE-to-the-rescue!">¶</a></h2><img alt="Architecture small" src="Figures/Architecture_small.png" style="width: 600px;">
+</img></div>
 </div>
 </div>
 </div></section><section>
@@ -9278,12 +9376,12 @@ Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.o
 </div>
 </div>
 </div>
-</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=58ea16ab">
+</div></section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=58ea16ab">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">histocc</span> <span class="kn">import</span> <span class="n">OccCANINE</span>
@@ -9301,12 +9399,63 @@ Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.o
 </div>
 </div>
 </div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>c:\Users\tsdj\.conda\envs\hedg-summer-school\Lib\site-packages\huggingface_hub\file_download.py:157: UserWarning: `huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does not support them in C:\Users\tsdj\.cache\huggingface\hub\models--christianvedel--OccCANINE. Caching files will still work but in a degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to see activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>model.safetensors:   0%|          | 0.00/528M [00:00&lt;?, ?B/s]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>c:\Users\tsdj\.conda\envs\hedg-summer-school\Lib\site-packages\huggingface_hub\file_download.py:157: UserWarning: `huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does not support them in C:\Users\tsdj\.cache\huggingface\hub\models--google--canine-s. Caching files will still work but in a degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to see activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>
+Prediction done. Cleaning results.
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
+<pre>c:\Users\tsdj\.conda\envs\hedg-summer-school\Lib\site-packages\histocc\prediction_assets.py:287: FutureWarning: A value is trying to be set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+The behavior will change in pandas 3.0. This inplace method will never work because the intermediate object on which we are setting values always behaves as a copy.
+
+For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' or df[col] = df[col].method(value) instead, to perform the operation inplace on the original object.
+
+
+  results["hisco_1"].fillna("-1", inplace=True)
+</pre>
+</div>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b93b3e5e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">result</span>
@@ -9320,7 +9469,7 @@ Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.o
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[34]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -9363,7 +9512,7 @@ Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.o
 <th>0</th>
 <td>unk[SEP]tailor of the finest suits</td>
 <td>79190</td>
-<td>0.816929</td>
+<td>0.816917</td>
 <td>Other Tailors and Dressmakers</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -9401,7 +9550,7 @@ Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.o
 <th>2</th>
 <td>unk[SEP]train's fireman</td>
 <td>98330</td>
-<td>0.986886</td>
+<td>0.986884</td>
 <td>Railway SteamEngine Fireman</td>
 <td>NaN</td>
 <td>NaN</td>
@@ -9467,7 +9616,7 @@ Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.o
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
@@ -9511,7 +9660,7 @@ Source: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.o
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [36]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">char</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="s1">'farmer'</span><span class="p">,</span> <span class="n">tokenize</span><span class="p">(</span><span class="s1">'farmer'</span><span class="p">,</span> <span class="mi">6</span><span class="p">)):</span>
@@ -9544,7 +9693,7 @@ Mapping "r" to "48"
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [37]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">tokenize</span><span class="p">(</span><span class="s1">'iron works labourer'</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="c1"># longer example</span>
@@ -9558,7 +9707,7 @@ Mapping "r" to "48"
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[37]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>[39, 48, 45, 44, 2, 53, 45, 48, 41, 49, 2, 42, 31, 32, 45, 51, 48, 35, 48, 1]</pre>
 </div>
@@ -9581,7 +9730,7 @@ Mapping "r" to "48"
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">HISCODataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
@@ -9615,7 +9764,7 @@ Mapping "r" to "48"
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [39]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -9633,7 +9782,7 @@ Mapping "r" to "48"
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[25]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[39]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -9685,7 +9834,7 @@ Mapping "r" to "48"
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [40]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">train_dataset</span> <span class="o">=</span> <span class="n">HISCODataset</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
@@ -9700,7 +9849,7 @@ Mapping "r" to "48"
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[26]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[40]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>{'occ1': 'iron works labourer',
  'encoded': tensor([39, 48, 45, 44,  2, 53, 45, 48, 41, 49,  2, 42, 31, 32, 45, 51, 48, 35,
@@ -9726,7 +9875,7 @@ Mapping "r" to "48"
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [41]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">histocc</span> <span class="kn">import</span> <span class="n">DATASETS</span>
@@ -9746,7 +9895,7 @@ Mapping "r" to "48"
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[27]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[41]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>99910</pre>
 </div>
@@ -9769,7 +9918,7 @@ Mapping "r" to "48"
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">description</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">train_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
@@ -9813,7 +9962,7 @@ Mapping "r" to "48"
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [43]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
@@ -9844,7 +9993,7 @@ Mapping "r" to "48"
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [44]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">nn</span>
@@ -9886,7 +10035,7 @@ Mapping "r" to "48"
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [45]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">HISCOClassifier</span><span class="p">()</span>
@@ -9930,7 +10079,7 @@ Mapping "r" to "48"
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [46]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train_epoch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">data_loader</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">):</span>
@@ -9965,7 +10114,7 @@ Mapping "r" to "48"
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [47]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span>
@@ -10003,7 +10152,7 @@ Mapping "r" to "48"
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [48]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
@@ -10023,16 +10172,16 @@ Mapping "r" to "48"
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Trained for 1 epochs. Validation accuracy: 62.4%
-Trained for 2 epochs. Validation accuracy: 68.7%
-Trained for 3 epochs. Validation accuracy: 70.8%
-Trained for 4 epochs. Validation accuracy: 69.6%
-Trained for 5 epochs. Validation accuracy: 72.39999999999999%
-Trained for 6 epochs. Validation accuracy: 72.0%
-Trained for 7 epochs. Validation accuracy: 70.8%
-Trained for 8 epochs. Validation accuracy: 72.89999999999999%
-Trained for 9 epochs. Validation accuracy: 73.7%
-Trained for 10 epochs. Validation accuracy: 75.4%
+<pre>Trained for 1 epochs. Validation accuracy: 65.2%
+Trained for 2 epochs. Validation accuracy: 70.6%
+Trained for 3 epochs. Validation accuracy: 71.8%
+Trained for 4 epochs. Validation accuracy: 72.5%
+Trained for 5 epochs. Validation accuracy: 72.1%
+Trained for 6 epochs. Validation accuracy: 73.9%
+Trained for 7 epochs. Validation accuracy: 71.5%
+Trained for 8 epochs. Validation accuracy: 73.8%
+Trained for 9 epochs. Validation accuracy: 72.3%
+Trained for 10 epochs. Validation accuracy: 74.2%
 </pre>
 </div>
 </div>
@@ -10616,10 +10765,7 @@ require(
             history: true,
             transition: "slide",
             slideNumber: "",
-            plugins: [RevealNotes],
-            width: 960,
-			      height: 700,
-
+            plugins: [RevealNotes]
         });
 
         var update = function(event){
