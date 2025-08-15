@@ -6,7 +6,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <title>slides_cv_version slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script><script type="module">
-  import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.7.0/mermaid.esm.min.mjs';
+  import mermaid from 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.0/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true });
 </script>
 <!-- General and theme style sheets -->
@@ -7415,7 +7415,6 @@ main {
                     processEnvironments: true
                 },
                 displayAlign: 'center',
-                messageStyle: 'none',
                 CommonHTML: {
                     linebreaks: {
                     automatic: true
@@ -7633,7 +7632,7 @@ Assistant Professor of Economic History
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
     <span class="n">task</span><span class="o">=</span><span class="s2">"image-to-text"</span><span class="p">,</span> 
     <span class="n">model</span> <span class="o">=</span> <span class="s2">"Salesforce/blip-image-captioning-base"</span>
@@ -7691,7 +7690,7 @@ Assistant Professor of Economic History
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">"object-detection"</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="s2">"facebook/detr-resnet-50"</span><span class="p">)</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="s2">"Figures/arkivdk7055378.png"</span><span class="p">)</span>
@@ -7799,7 +7798,7 @@ Assistant Professor of Economic History
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
 <span class="n">classifier</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
     <span class="n">task</span> <span class="o">=</span> <span class="s2">"sentiment-analysis"</span><span class="p">,</span> 
     <span class="n">model</span> <span class="o">=</span> <span class="s2">"distilbert/distilbert-base-uncased-finetuned-sst-2-english"</span>
@@ -7856,7 +7855,7 @@ Assistant Professor of Economic History
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">task</span> <span class="o">=</span> <span class="s2">"ner"</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="s2">"dslim/bert-base-NER"</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span>
 <span class="w">    </span><span class="sd">"""</span>
@@ -7923,7 +7922,7 @@ I-ORG: College; Probability: 0.997
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
 
 <span class="n">translator</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">"translation_en_to_fr"</span><span class="p">,</span> <span class="n">model</span> <span class="o">=</span> <span class="s2">"google-t5/t5-base"</span><span class="p">)</span>
 
@@ -7982,8 +7981,8 @@ I-ORG: College; Probability: 0.997
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
+<span class="kn">import</span> <span class="nn">torch</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
     <span class="n">task</span> <span class="o">=</span> <span class="s2">"text-generation"</span><span class="p">,</span>
@@ -8231,7 +8230,7 @@ I-ORG: College; Probability: 0.997
 <div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 
 <span class="n">one_hot_encoded</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">one_hot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">tokenized_text</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">one_hot_encoded</span><span class="p">)</span>
@@ -8375,10 +8374,10 @@ I-ORG: College; Probability: 0.997
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Text-embeddings">Text embeddings<a class="anchor-link" href="#Text-embeddings">¶</a></h1><p>One-hot encoding is <em>sparse</em>.
+<h1 id="Text-embeddings">Text embeddings<a class="anchor-link" href="#Text-embeddings">¶</a></h1><p>One-hot encoding is <em>sparse</em>. 
 This is particularly true if there are many classes, and working with language, over 100,000 classes is not uncommon</p>
-<p>However, words are <em>related</em>, and we can often store them much more efficiently.
-Embedding is one such way, in which a sparse vector is transformed to a (often much lower dimensional) non-sparse/dense vector.
+<p>However, words are <em>related</em>, and we can often store them much more efficiently. 
+Embedding is one such way, in which a sparse vector is transformed to a (often much lower dimensional) non-sparse/dense vector. 
 In this more dense space, we often see that words such as "father" and "mother" might be closer to each other than to "Italy"</p>
 <p>For a problem with n words (or tokens, in the general case) and an embedding dimension k, the embedding function is a function $f: \{0, 1\}^n \rightarrow \mathbb{R}^k$</p>
 <p>As such, an embedding is "just" a lookup table, "looking up" <em>k</em> real numbers for each word</p>
@@ -8441,7 +8440,7 @@ In this more dense space, we often see that words such as "father" and "mother" 
 <div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">embedding_lookup</span> <span class="o">=</span> <span class="p">{</span>
     <span class="mi">0</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
@@ -8529,7 +8528,7 @@ Let's take a look at some 50-dimensional vector representations of 400,000 words
 <div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torchtext</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torchtext</span>
 
 <span class="n">vocab</span> <span class="o">=</span> <span class="n">torchtext</span><span class="o">.</span><span class="n">vocab</span><span class="o">.</span><span class="n">GloVe</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'6B'</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 </pre></div>
@@ -8707,9 +8706,9 @@ In this example, I will do this using <a href="https://lvdmaaten.github.io/publi
 <div class="jp-InputPrompt jp-InputArea-prompt">In [37]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.manifold</span><span class="w"> </span><span class="kn">import</span> <span class="n">TSNE</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">TSNE</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">get_tsne_embeddings</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">get_tsne_embeddings</span><span class="p">(</span>
         <span class="n">embeddings</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
         <span class="n">dimensions</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
         <span class="p">):</span>
@@ -9137,7 +9136,7 @@ Let us see this is practice</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Neural-networks-for-text">Neural networks for text<a class="anchor-link" href="#Neural-networks-for-text">¶</a></h1><p>We now know how to represent text as numerical data suitable for modelling.
+<h1 id="Neural-networks-for-text">Neural networks for text<a class="anchor-link" href="#Neural-networks-for-text">¶</a></h1><p>We now know how to represent text as numerical data suitable for modelling. 
 Our next objective is to learn <em>how</em> to model text data</p>
 <p>One key observation is that text is somewhat similar to time series data, in that a clear <em>sequential</em> structure is present: The meaning of a word depends on its context, i.e., how it is embedded in a sentence</p>
 <p>Modern approaches roughly falls into one of two categories</p>
@@ -9156,13 +9155,13 @@ Our next objective is to learn <em>how</em> to model text data</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="A-recurrent-cell-of-a-neural-network">A recurrent cell of a neural network<a class="anchor-link" href="#A-recurrent-cell-of-a-neural-network">¶</a></h3><p><img alt="Drawing" src="./figs/figure_6-9.png" style="width: 400px;"/></p>
+<h3 id="A-recurrent-cell-of-a-neural-network">A recurrent cell of a neural network<a class="anchor-link" href="#A-recurrent-cell-of-a-neural-network">¶</a></h3><img alt="Drawing" src="./figs/figure_6-9.png" style="width: 400px;">
 <p><em>Source</em>: Deep Learning with Python by Francois Collet (ISBN10: 9781617294433)</p>
 <p>We have not yet specified the type of recurrent connection, just that it has form</p>
 <p>$y_t = f(x_t, y_{t - 1})$</p>
 <p>We can think about an autoregressive linear model with covariates as one example</p>
 <p>$y_t = \alpha y_{t - 1} + \beta f_t$</p>
-</div>
+</img></div>
 </div>
 </div>
 </div></section><section>
@@ -9173,9 +9172,9 @@ Our next objective is to learn <em>how</em> to model text data</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Recurrent-cells-and-unfolding">Recurrent cells and unfolding<a class="anchor-link" href="#Recurrent-cells-and-unfolding">¶</a></h3><p>Usually, a recurrent neural network looks something like the image below - i.e., it has a "loop" where it feeds into itself (left). This can then be "unfolded" (right), in which way it looks more like a regular network, with an additional input and output ("hidden states").</p>
-<p><img alt="Drawing" src="./figs/Recurrent_neural_network_unfold.svg" style="width: 600px;"/></p>
+<img alt="Drawing" src="./figs/Recurrent_neural_network_unfold.svg" style="width: 600px;">
 <p><em>Source</em>: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/w/index.php?curid=60109157">https://commons.wikimedia.org/w/index.php?curid=60109157</a>"</p>
-</div>
+</img></div>
 </div>
 </div>
 </div></section></section><section><section>
@@ -9203,9 +9202,9 @@ Our next objective is to learn <em>how</em> to model text data</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Long-Short-Term-Memory-(LSTM)">Long Short-Term Memory (LSTM)<a class="anchor-link" href="#Long-Short-Term-Memory-(LSTM)">¶</a></h3><p><img alt="Drawing" src="./figs/Long_Short-Term_Memory.svg" style="width: 800px;"/></p>
+<h3 id="Long-Short-Term-Memory-(LSTM)">Long Short-Term Memory (LSTM)<a class="anchor-link" href="#Long-Short-Term-Memory-(LSTM)">¶</a></h3><img alt="Drawing" src="./figs/Long_Short-Term_Memory.svg" style="width: 800px;">
 <p><em>Source</em>: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/w/index.php?curid=60149410">https://commons.wikimedia.org/w/index.php?curid=60149410</a>"</p>
-</div>
+</img></div>
 </div>
 </div>
 </div></section></section><section><section>
@@ -9215,9 +9214,9 @@ Our next objective is to learn <em>how</em> to model text data</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Gated-Recurrent-Unit-(GRU)">Gated Recurrent Unit (GRU)<a class="anchor-link" href="#Gated-Recurrent-Unit-(GRU)">¶</a></h3><p><img alt="Drawing" src="./figs/Gated_Recurrent_Unit.svg" style="width: 800px;"/></p>
+<h3 id="Gated-Recurrent-Unit-(GRU)">Gated Recurrent Unit (GRU)<a class="anchor-link" href="#Gated-Recurrent-Unit-(GRU)">¶</a></h3><img alt="Drawing" src="./figs/Gated_Recurrent_Unit.svg" style="width: 800px;">
 <p><em>Source</em>: "fdeloche - Own work, CC BY-SA 4.0, <a href="https://commons.wikimedia.org/w/index.php?curid=60466441">https://commons.wikimedia.org/w/index.php?curid=60466441</a>"</p>
-</div>
+</img></div>
 </div>
 </div>
 </div></section></section><section><section>
@@ -9255,8 +9254,8 @@ Our next objective is to learn <em>how</em> to model text data</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="OccCANINE-to-the-rescue!"><em>OccCANINE</em> to the rescue!<a class="anchor-link" href="#OccCANINE-to-the-rescue!">¶</a></h2><p><img alt="Architecture small" src="Figures/Architecture_small.png" style="width: 600px;"/></p>
-</div>
+<h2 id="OccCANINE-to-the-rescue!"><em>OccCANINE</em> to the rescue!<a class="anchor-link" href="#OccCANINE-to-the-rescue!">¶</a></h2><img alt="Architecture small" src="Figures/Architecture_small.png" style="width: 600px;">
+</img></div>
 </div>
 </div>
 </div></section><section>
@@ -9337,7 +9336,7 @@ Our next objective is to learn <em>how</em> to model text data</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">histocc</span><span class="w"> </span><span class="kn">import</span> <span class="n">OccCANINE</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">histocc</span> <span class="kn">import</span> <span class="n">OccCANINE</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">OccCANINE</span><span class="p">()</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
@@ -9442,7 +9441,7 @@ Our next objective is to learn <em>how</em> to model text data</p>
 <li>Ford (2025) to study the development of the Scandinavian knowledge economy</li>
 <li>Several more</li>
 </ul>
-<p><em><strong>And</strong></em></p>
+<p>*<strong>And</strong>*</p>
 <ul>
 <li>Four sepperate (great) master thesises at SDU last year</li>
 </ul>
@@ -9496,21 +9495,21 @@ Our next objective is to learn <em>how</em> to model text data</p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [52]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tensor</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="n">CHARS_IN_TOYDATA</span> <span class="o">=</span> <span class="p">[</span><span class="s1">' '</span><span class="p">,</span> <span class="s1">'"'</span><span class="p">,</span> <span class="s2">"'"</span><span class="p">,</span> <span class="s1">'('</span><span class="p">,</span> <span class="s1">')'</span><span class="p">,</span> <span class="s1">'*'</span><span class="p">,</span> <span class="s1">'+'</span><span class="p">,</span> <span class="s1">','</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">,</span> <span class="s1">'.'</span><span class="p">,</span> <span class="s1">'/'</span><span class="p">,</span> <span class="s1">'0'</span><span class="p">,</span> <span class="s1">'1'</span><span class="p">,</span> <span class="s1">'2'</span><span class="p">,</span> <span class="s1">'3'</span><span class="p">,</span> <span class="s1">'4'</span><span class="p">,</span> <span class="s1">'5'</span><span class="p">,</span> <span class="s1">'6'</span><span class="p">,</span> <span class="s1">'7'</span><span class="p">,</span> <span class="s1">'8'</span><span class="p">,</span> <span class="s1">'9'</span><span class="p">,</span> <span class="s1">':'</span><span class="p">,</span> <span class="s1">';'</span><span class="p">,</span> <span class="s1">'?'</span><span class="p">,</span> <span class="s1">'@'</span><span class="p">,</span> <span class="s1">'['</span><span class="p">,</span> <span class="s1">']'</span><span class="p">,</span> <span class="s1">'_'</span><span class="p">,</span> <span class="s1">'`'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">,</span> <span class="s1">'d'</span><span class="p">,</span> <span class="s1">'e'</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">,</span> <span class="s1">'h'</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">,</span> <span class="s1">'j'</span><span class="p">,</span> <span class="s1">'k'</span><span class="p">,</span> <span class="s1">'l'</span><span class="p">,</span> <span class="s1">'m'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">,</span> <span class="s1">'p'</span><span class="p">,</span> <span class="s1">'q'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="s1">'s'</span><span class="p">,</span> <span class="s1">'t'</span><span class="p">,</span> <span class="s1">'u'</span><span class="p">,</span> <span class="s1">'v'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">,</span> <span class="s1">'x'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">,</span> <span class="s1">'z'</span><span class="p">,</span> <span class="s1">'{'</span><span class="p">,</span> <span class="s1">'¢'</span><span class="p">,</span> <span class="s1">'£'</span><span class="p">,</span> <span class="s1">'©'</span><span class="p">,</span> <span class="s1">'¬'</span><span class="p">,</span> <span class="s1">'Â'</span><span class="p">,</span> <span class="s1">'Ã'</span><span class="p">,</span> <span class="s1">'â'</span><span class="p">,</span> <span class="s1">'œ'</span><span class="p">,</span> <span class="s1">'š'</span><span class="p">,</span> <span class="s1">'ž'</span><span class="p">,</span> <span class="s1">'‚'</span><span class="p">,</span> <span class="s1">'„'</span><span class="p">,</span> <span class="s1">'€'</span><span class="p">]</span>
 <span class="n">MAP_CHAR_IDX</span> <span class="o">=</span> <span class="p">{</span>
     <span class="n">char</span><span class="p">:</span> <span class="n">idx</span> <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">CHARS_IN_TOYDATA</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">tokenize</span><span class="p">(</span><span class="n">hisco</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_len</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="n">hisco</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_len</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
     <span class="n">encoded</span> <span class="o">=</span> <span class="p">[</span><span class="n">MAP_CHAR_IDX</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">hisco</span><span class="p">]</span>
     <span class="n">encoded</span> <span class="o">=</span> <span class="n">encoded</span><span class="p">[:</span><span class="n">max_len</span><span class="p">]</span>
     <span class="n">encoded</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">max_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">encoded</span><span class="p">))</span>
@@ -9610,17 +9609,17 @@ Mapping "r" to "48"
 <div class="jp-InputPrompt jp-InputArea-prompt">In [55]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">HISCODataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">HISCODataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">tokenize</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Tensor</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Tensor</span><span class="p">]:</span>
         <span class="n">record</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
         <span class="n">encoded</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenizer</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">occ1</span><span class="p">)</span>
 
@@ -9644,8 +9643,8 @@ Mapping "r" to "48"
 <div class="jp-InputPrompt jp-InputArea-prompt">In [56]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">dirs</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATA_DIR</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">dirs</span> <span class="kn">import</span> <span class="n">DATA_DIR</span>
 
 <span class="n">train_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s1">'toy_data_train.csv'</span><span class="p">))</span>
 <span class="n">train_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -9755,7 +9754,7 @@ Mapping "r" to "48"
 <div class="jp-InputPrompt jp-InputArea-prompt">In [60]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">histocc</span><span class="w"> </span><span class="kn">import</span> <span class="n">DATASETS</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">histocc</span> <span class="kn">import</span> <span class="n">DATASETS</span>
 
 <span class="n">keys</span> <span class="o">=</span> <span class="n">DATASETS</span><span class="p">[</span><span class="s1">'keys'</span><span class="p">]()</span>
 <span class="n">map_hisco_label</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">keys</span><span class="p">[[</span><span class="s1">'hisco'</span><span class="p">,</span> <span class="s1">'code'</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -9842,7 +9841,7 @@ Mapping "r" to "48"
 <div class="jp-InputPrompt jp-InputArea-prompt">In [63]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
 
 <span class="n">test_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">,</span> <span class="s1">'toy_data_test.csv'</span><span class="p">))</span>
 <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">HISCODataset</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
@@ -9873,18 +9872,18 @@ Mapping "r" to "48"
 <div class="jp-InputPrompt jp-InputArea-prompt">In [64]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">nn</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">nn</span>
 
 
-<span class="k">class</span><span class="w"> </span><span class="nc">HISCOClassifier</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">128</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">HISCOClassifier</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">128</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gru</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_size</span><span class="p">,</span> <span class="mi">1919</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_seq</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_seq</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
         <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">input_seq</span><span class="p">)</span>
         <span class="n">out</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gru</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
@@ -9959,7 +9958,7 @@ Mapping "r" to "48"
 <div class="jp-InputPrompt jp-InputArea-prompt">In [66]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">train_epoch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">data_loader</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">):</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train_epoch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">data_loader</span><span class="p">,</span> <span class="n">loss_fn</span><span class="p">):</span>
     <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">data_loader</span><span class="p">:</span>
@@ -9995,7 +9994,7 @@ Mapping "r" to "48"
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data_loader</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data_loader</span><span class="p">):</span>
     <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 
     <span class="n">total_correct</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># keep count of correct predictions</span>
@@ -10586,7 +10585,7 @@ Instead, we use an <code>API</code></p>
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">google.generativeai</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">genai</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">google.generativeai</span> <span class="k">as</span> <span class="nn">genai</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">genai</span><span class="o">.</span><span class="n">GenerativeModel</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s1">'gemini-2.5-flash'</span><span class="p">)</span>
 <span class="n">file</span> <span class="o">=</span> <span class="n">genai</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s1">'./figs/44.jpg'</span><span class="p">)</span>
@@ -10908,6 +10907,23 @@ Instead, we use an <code>API</code></p>
 </div>
 </div>
 </div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0eacc085">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Exercise:-Transcription">Exercise: Transcription<a class="anchor-link" href="#Exercise:-Transcription">¶</a></h2><p>Let's try to train our own transcription model.
+You can find this exercise as a <a href="https://colab.research.google.com/drive/1GnpFi2xGQDfOkvdito0gRVvlx9BybZcW?usp=sharing">Colab hosted notebook</a></p>
+<ol>
+<li>Try experimenting with an alternative (non-linear) activation function to the <code>sigmoid</code> function used in the baseline model. A list of activation functions is available <a href="https://pytorch.org/docs/stable/nn.functional.html#non-linear-activation-functions">here</a></li>
+<li>Try changing the number of channels in the first convolutional layer (<code>self.conv1</code>) from 16 to 32. What else do you need to change to ensure the model still work? How does this affect the number of parameters of the model?</li>
+<li>Experiment with, e.g., the numbers of layers in your model (<strong>note</strong>: this may necessitate appropriately adjusting the subsequent layers), the choice of optimizer and learning rate, or the number of epochs. How high performance can you achieve on the test split?</li>
+</ol>
+</div>
+</div>
+</div>
 </div></section></section>
 </div>
 </div>
@@ -10933,10 +10949,7 @@ require(
             history: true,
             transition: "slide",
             slideNumber: "",
-            plugins: [RevealNotes],
-            width: 960,
-			      height: 700,
-
+            plugins: [RevealNotes]
         });
 
         var update = function(event){
