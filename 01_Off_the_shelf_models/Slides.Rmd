@@ -235,7 +235,7 @@ class: inverse, middle, center
 ## Demo 1.1: Automatic caption
 
 .pull-left-wide[
-```python
+```{python, eval=FALSE}
 from transformers import pipeline
 model = pipeline(
     task="image-to-text",
@@ -249,7 +249,7 @@ results = model("Figures/arkivdk7055378.png")
 --
 
 .pull-left-wide[
-```python
+```{python, eval=FALSE}
 print(results)
 ```
 ```
@@ -261,7 +261,7 @@ print(results)
 ## Demo 1.2: Object detection
 
 .pull-left-wide[
-```python
+```{python, eval=FALSE}
 from transformers import pipeline
 
 model = pipeline("object-detection", model = "facebook/detr-resnet-50")
@@ -320,7 +320,7 @@ class: inverse, middle, center
 ## Demo 2.1: Sentiment analysis
 
 .pull-left-wide[
-```python
+```{python, eval=FALSE}
 from transformers import pipeline
 classifier = pipeline(
     task = "sentiment-analysis",
@@ -333,7 +333,7 @@ result = classifier("It is a lot of fun to learn advanced ML stuff.")
 --
 
 .pull-left-wide[
-```python
+```{python, eval=FALSE}
 print(result)
 ```
 ```
@@ -345,7 +345,7 @@ print(result)
 ## Demo 2.2: Named Entity Recognition
 
 .pull-left-wide[
-```python
+```{python, eval=FALSE}
 from transformers import pipeline
 model = pipeline(task = "ner", model = "dslim/bert-base-NER")
 result = model(
@@ -379,7 +379,7 @@ I-ORG: College; Probability: 0.997
 ## Demo 2.3: Translation
 
 .pull-left-wide[
-```python
+```{python, eval=FALSE}
 from transformers import pipeline
 
 translator = pipeline("translation_en_to_fr", model = "google-t5/t5-base")
@@ -393,7 +393,7 @@ results = translator(text)
 --
 
 .pull-left-wide[
-```python
+```{python, eval=FALSE}
 for result in results:
     print(f"Translated Text: {result['translation_text']}")
 ```
@@ -407,7 +407,7 @@ Translated Text: Bonjour, aimez-vous l'apprentissage automatique et l'histoire Ã
 
 .pull-left-wide[
 .small123[
-```python
+```{python, eval=FALSE}
 from transformers import pipeline
 import torch
 
@@ -445,7 +445,7 @@ In summary, economic history is a multidisciplinary field that combines'}]
 
 .pull-left-wide[
 .small123[
-```python
+```{python, eval=FALSE}
 messages = [
     {
         "role": "system",

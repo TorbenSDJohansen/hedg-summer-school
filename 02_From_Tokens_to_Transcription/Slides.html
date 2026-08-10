@@ -332,20 +332,23 @@ This works phenomenally well, the reason of which has to do with how words are r
 
 .pull-left-wide[
 [GloVe](https://nlp.stanford.edu/projects/glove/) is a commonly used pre-trained embedding table. Let's take a look at some 50-dimensional vector representations of 400,000 words (or word-pieces) and how they are related:
-```python
+
+``` python
 import torchtext
 
 vocab = torchtext.vocab.GloVe(name='6B', dim=50)
 ```
 
 We will start by studying the placement of "father" and "mother" in relation to each other (first 5 dimensions, for readability):
-```python
+
+``` python
 vocab.vectors[vocab.stoi['father']][:5]
 ```
 ```
 tensor([ 0.0955,  0.7042, -0.4078, -0.8084,  1.2560])
 ```
-```python
+
+``` python
 vocab.vectors[vocab.stoi['mother']][:5]
 ```
 ```
@@ -358,7 +361,8 @@ tensor([ 0.4336,  1.0727, -0.6196, -0.8068,  1.2519])
 
 .pull-left-wide[
 Intuitively, we would expect that if we subtract "man" from "father", and then add "woman", we should end up with "mother". Let's see this in practice:
-```python
+
+``` python
 embedding_father = vocab.vectors[vocab.stoi['father']]
 embedding_man = vocab.vectors[vocab.stoi['man']]
 embedding_woman = vocab.vectors[vocab.stoi['woman']]
@@ -375,7 +379,8 @@ tensor([ 0.0084,  0.9224, -0.8176, -0.8477,  1.1528])
 
 .pull-left-wide[
 We now calculate the distances between `qvec` and all embeddings, finding the associated word that lies closest to `qvec`:
-```python
+
+``` python
 distances = torch.sum((vocab.vectors - qvec) ** 2, dim=1)
 closest = torch.argmin(distances)
 closest_word = vocab.itos[closest]
@@ -393,7 +398,8 @@ closest_word
 Let's try to visualize this movement in embedding space. First, we'll simplify to 2 dimensions so we can actually visualize it. We do this using [$t$-SNE](https://lvdmaaten.github.io/publications/papers/JMLR_2008.pdf) over the 10,000 most common words in the GloVe vocabulary.
 
 We're simplifying a bit here for visualization purposes, but this is all real data.
-```python
+
+``` python
 from sklearn.manifold import TSNE
 
 def get_tsne_embeddings(embeddings: np.ndarray, dimensions: int = 2):
@@ -426,7 +432,8 @@ tsne_embeddings, tsne_embeddings_s = get_tsne_embeddings(embeddings_50d, 2)
 
 .pull-left-wide[
 Intuitively, we would expect that if we subtract "man" from "son", and then add "woman", we should end up with "daughter". Let's see this in practice:
-```python
+
+``` python
 embedding_son = vocab.vectors[vocab.stoi['son']]
 embedding_man = vocab.vectors[vocab.stoi['man']]
 embedding_woman = vocab.vectors[vocab.stoi['woman']]
@@ -437,7 +444,8 @@ qvec[:5]
 ```
 tensor([ 0.1900,  1.1960, -0.5546, -0.5261,  1.0682])
 ```
-```python
+
+``` python
 distances = torch.sum((vocab.vectors - qvec) ** 2, dim=1)
 closest = torch.argmin(distances)
 closest_word = vocab.itos[closest]
@@ -458,7 +466,8 @@ closest_word
 
 .pull-left-wide[
 Intuitively, we would expect that if we subtract "france" from "paris", and then add "italy", we should end up with "rome". Let's see this in practice:
-```python
+
+``` python
 embedding_paris = vocab.vectors[vocab.stoi['paris']]
 embedding_france = vocab.vectors[vocab.stoi['france']]
 embedding_italy = vocab.vectors[vocab.stoi['italy']]
@@ -469,7 +478,8 @@ qvec[:5]
 ```
 tensor([ 1.8746,  0.1050, -1.0362,  0.2511,  0.2243])
 ```
-```python
+
+``` python
 distances = torch.sum((vocab.vectors - qvec) ** 2, dim=1)
 closest = torch.argmin(distances)
 closest_word = vocab.itos[closest]
@@ -645,7 +655,8 @@ We *encode* a conceptual understanding into an embedding space and *decode* it i
 ## *OccCANINE* in action
 
 .pull-left-wide[
-```python
+
+``` python
 from histocc import OccCANINE
 
 model = OccCANINE()
@@ -779,7 +790,8 @@ tokenize('iron works labourer', 20)  # longer example
 
 .pull-left-wide[
 .small123[
-```python
+
+``` python
 class HISCODataset(Dataset):
     def __init__(self, dataset: pd.DataFrame):
         super().__init__()
@@ -806,7 +818,8 @@ class HISCODataset(Dataset):
 ### Loading the data
 
 .pull-left-wide[
-```python
+
+``` python
 import os
 from dirs import DATA_DIR
 
@@ -826,7 +839,8 @@ train_data.head(3)
 --
 
 .pull-left-wide[
-```python
+
+``` python
 train_dataset = HISCODataset(train_data)
 train_dataset[0]
 ```
@@ -844,7 +858,8 @@ train_dataset[0]
 ### So which HISCO code does the label 1915 refer to?
 
 .pull-left-wide[
-```python
+
+``` python
 from histocc import DATASETS
 
 keys = DATASETS['keys']()
@@ -862,7 +877,8 @@ map_label_hisco[1915]
 
 .pull-left-wide[
 *...and some other examples...*
-```python
+
+``` python
 for description, label in train_data.head(5).values:
     hisco = map_label_hisco[label]
     print(f'"{description}" has label {label} -&gt; HISCO: {hisco}')
@@ -883,7 +899,8 @@ for description, label in train_data.head(5).values:
 
 .pull-left-wide[
 With our dataset class, we can build data loaders, which are wrappers around our dataset responsible for creating a **batch** of data
-```python
+
+``` python
 from torch.utils.data import DataLoader
 
 test_data = pd.read_csv(os.path.join(DATA_DIR, 'toy_data_test.csv'))
@@ -900,7 +917,8 @@ test_data_loader = DataLoader(test_dataset, batch_size=32)
 .pull-left-wide[
 **Goal**: given an occupational description, provide its associated HISCO code
 .small123[
-```python
+
+``` python
 from torch import Tensor, nn
 
 class HISCOClassifier(nn.Module):
@@ -926,7 +944,8 @@ class HISCOClassifier(nn.Module):
 .pull-left-wide[
 We can now instantiate our **model**; we also need an objective (or **loss**) function and an **optimizer**
 .small123[
-```python
+
+``` python
 model = HISCOClassifier()
 
 # For single-label classification, cross entropy is the
@@ -955,7 +974,8 @@ We now train our model by iteratively:
 4. Calculate the derivative of the loss wrt. the model parameters
 5. Update the model parameters
 
-```python
+
+``` python
 def train_epoch(model, optimizer, data_loader, loss_fn):
     model.train()
     for batch in data_loader:
@@ -974,7 +994,8 @@ def train_epoch(model, optimizer, data_loader, loss_fn):
 
 .pull-left-wide[
 Ultimately, we want to evaluate our model in terms of how often it correctly predicts a HISCO code given an occupational description
-```python
+
+``` python
 @torch.no_grad
 def evaluate(model, data_loader):
     model.eval()
@@ -995,7 +1016,8 @@ def evaluate(model, data_loader):
 
 .pull-left-wide[
 We now train our model by looping over the training data 10 times
-```python
+
+``` python
 for epoch in range(1, 11):
     train_epoch(model, optimizer, train_data_loader, loss_fn)
     acc = evaluate(model, test_data_loader)
@@ -1241,7 +1263,8 @@ We do **not** want to use the graphical interface when working with large collec
 .pull-left-wide[
 In Python, this could be in the form of a script like:
 .small123[
-```python
+
+``` python
 prompt = '''
 The image shows one or multiple tables.
 Each table contains the five columns:
