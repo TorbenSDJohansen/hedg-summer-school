@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Slides.knit</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.30/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.3.0/panelset.js"></script>
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <script src="libs/xaringanExtra-progressBar-0.0.1/progress-bar.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, inverse, middle
+
+
+
+
+
+<style>.xe__progress-bar__container {
+  top:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 0.25em;
+  background-color: #808080;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+&lt;style type="text/css"&gt;
+.pull-left {
+  float: left;
+  width: 44%;
+}
+.pull-right {
+  float: right;
+  width: 44%;
+}
+.pull-right ~ p {
+  clear: both;
+}
+
+
+.pull-left-wide {
+  float: left;
+  width: 66%;
+}
+.pull-right-wide {
+  float: right;
+  width: 66%;
+}
+.pull-right-wide ~ p {
+  clear: both;
+}
+
+.pull-left-narrow {
+  float: left;
+  width: 30%;
+}
+.pull-right-narrow {
+  float: right;
+  width: 30%;
+}
+
+.tiny123 {
+  font-size: 0.40em;
+}
+
+.small123 {
+  font-size: 0.80em;
+}
+
+.large123 {
+  font-size: 2em;
+}
+
+.red {
+  color: red
+}
+
+.orange {
+  color: orange
+}
+
+.green {
+  color: green
+}
+&lt;/style&gt;
+
+
+
+# Statistics
+## Lecture X: Template
+
+### Christian Vedel,&lt;br&gt;Department of Economics
+
+### Email: [christian-vs@sam.sdu.dk](christian-vs@sam.sdu.dk)
+
+### Updated 2026-01-24
+
+
+
+.footnote[
+.left[
+.small123[
+*This is a template slide deck demonstrating Xaringan features*
+]
+]
+]
+
+
+---
+class: middle
+# Today's Lecture
+.pull-left-wide[
+**This template demonstrates:**
+
+- Basic slide structure and layouts
+- Two-column designs (wide/narrow)
+- Incremental reveal
+- Math with LaTeX
+- R code chunks
+- Images and figures
+- Text styling and colors
+]
+
+.pull-right-narrow[
+![Trees](Figures/Trees1.jpg)
+]
+
+---
+class: inverse, middle, center
+# Section Headers
+Use `class: inverse, middle, center` for section dividers
+
+---
+# Two-Column Layouts
+
+.pull-left[
+### Equal columns (44% each)
+Use `.pull-left` and `.pull-right` for balanced layouts.
+
+- Point one
+- Point two
+- Point three
+]
+
+.pull-right[
+### Right column
+Perfect for placing images next to text or comparing concepts side by side.
+
+![Trees](Figures/Trees1.jpg)
+]
+
+---
+# Wide/Narrow Layouts
+
+.pull-left-wide[
+### Wide column (66%)
+Use `.pull-left-wide` for content that needs more space.
+
+This is useful when you have:
+- Longer explanations
+- Code examples
+- Detailed bullet points
+
+The narrow column works well for:
+- Images
+- Key takeaways
+- Quick references
+]
+
+.pull-right-narrow[
+### Narrow (30%)
+
+.small123[
+*Perfect for images or brief notes*
+]
+
+![Trees](Figures/Trees1.jpg)
+]
+
+---
+# Incremental Reveal
+
+Use `--` on a new line to reveal content step by step.
+
+--
+
+**First point appears**
+
+--
+
+**Second point appears**
+
+--
+
+**Third point appears**
+
+--
+
+This is great for:
+- Building up complex ideas
+- Keeping audience focused
+- Creating suspense
+
+---
+class: middle
+# Math with LaTeX
+
+.pull-left[
+### Inline math
+The sample mean is `\(\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i\)`
+
+### Display math
+`$$\hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2}$$`
+]
+
+.pull-right[
+### More examples
+
+**Normal distribution:**
+`$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$`
+
+**Probability:**
+`$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$`
+]
+
+---
+# R Code Chunks
+
+.pull-left[
+### Code with output
+
+``` r
+library(ggplot2)
+```
+
+```
+## Warning: package 'ggplot2' was built under R version 4.4.3
+```
+
+``` r
+set.seed(42)
+df &lt;- data.frame(x = rnorm(50), y = rnorm(50))
+ggplot(df, aes(x, y)) +
+  geom_point() +
+  theme_minimal()
+```
+
+![](Slides_files/figure-html/example-plot-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+### Code display only
+
+``` r
+# Regression example
+model &lt;- lm(y ~ x, data = df)
+summary(model)
+```
+
+### Hidden code (results only)
+
+```
+## Mean of x: -0.036
+```
+]
+
+---
+# Text Styling
+
+.pull-left[
+### Size classes
+.tiny123[This is `.tiny123` (40% size)]
+
+.small123[This is `.small123` (80% size)]
+
+Normal text size
+
+.large123[`.large123`]
+]
+
+.pull-right[
+### Color classes
+- .red[This text is red] using `.red[]`
+- .orange[This text is orange] using `.orange[]`
+- .green[This text is green] using `.green[]`
+
+### Emphasis
+- **Bold text**
+- *Italic text*
+- ***Bold and italic***
+]
+
+---
+# Blockquotes and Footnotes
+
+&gt; "Statistics is about quantifying what we **know** and what we **don't know** based on some analysis of some data."
+
+--
+
+&gt; Use blockquotes for definitions, important quotes, or key takeaways.
+
+.footnote[
+.small123[
+**Note:** Footnotes appear at the bottom of the slide. Use `.footnote[]` combined with `.small123[]` for subtle references.
+]
+]
+
+---
+# Tables
+
+.pull-left[
+### Markdown tables
+| Variable | Type | Description |
+|----------|------|-------------|
+| `\(x\)` | Continuous | Predictor |
+| `\(y\)` | Continuous | Outcome |
+| `\(\varepsilon\)` | Random | Error term |
+]
+
+.pull-right[
+### Example data
+| Obs | Price | Size |
+|-----|-------|------|
+| 1 | 250k | 120 sqm |
+| 2 | 350k | 80 sqm |
+| 3 | 450k | 150 sqm |
+]
+
+---
+# Images
+
+.pull-left[
+### Markdown syntax
+```markdown
+![Caption](Figures/Trees1.jpg)
+```
+
+![Trees](Figures/Trees1.jpg)
+]
+
+.pull-right[
+### HTML for more control
+```html
+&lt;img src="Figures/Trees1.jpg"
+     width="300"/&gt;
+```
+
+&lt;img src="Figures/Trees1.jpg" width="250"/&gt;
+
+.small123[*Use HTML when you need specific dimensions*]
+]
+
+---
+class: middle
+# Slide Classes
+
+| Class | Effect |
+|-------|--------|
+| `class: middle` | Vertically center content |
+| `class: center` | Horizontally center content |
+| `class: inverse` | Dark background, light text |
+| Combine: `class: inverse, middle, center` | All effects together |
+
+---
+class: middle
+# Tips for Good Slides
+
+.pull-left-wide[
+1. **Keep it simple** - One main idea per slide
+2. **Use visuals** - Images and figures help retention
+3. **Incremental reveal** - Don't overwhelm with information
+4. **Consistent styling** - Use the CSS classes provided
+5. **Code examples** - Show, don't just tell
+6. **White space** - Let your content breathe
+]
+
+---
+# Before Next Time
+
+.pull-left[
+- Duplicate this template folder for new lectures
+- Rename "Lecture X" to appropriate number
+- Update the title slide
+- Add your content
+
+**Remember:**
+- Knit to HTML before class
+- Push to GitHub for students to access
+]
+
+.pull-right[
+![Trees](Figures/Trees1.jpg)
+]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(SDU_logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 125px;
+  height: 60px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // insert more to hide here
+    ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
