@@ -28,13 +28,24 @@ dependencies:
   - pillow
   - matplotlib
   - pip:
-      # torchtext is archived/unmaintained upstream; its compiled extension
-      # only loads against the torch version it shipped with. Pinned here -
-      # confirmed torch==2.13.* (latest at pip-resolve time) breaks
-      # torchtext's libtorchtext.pyd with "Could not load this library".
-      - torch==2.3.*
-      - torchtext==0.18.*
+      - torch
       - transformers
       # histocc isn't published to PyPI - install straight from GitHub
       - git+https://github.com/christianvedels/OccCANINE.git
+      # histocc's own dependency list is incomplete - these are needed at
+      # import time (unidecode, seaborn, wandb) but not declared, so pip
+      # won't pull them in on its own.
+      - unidecode
+      - seaborn
+      - wandb
       - google-generativeai
+      # torchtext is archived/unmaintained upstream and only used by
+      # embedding_illustration.py and the GloVe cells of the original
+      # slides_cv_version.ipynb (both reference-only, not slides or
+      # exercises that actually run). Its compiled extension (libtorchtext)
+      # only loads against the torch version it shipped with, and that's
+      # torch<=2.3 - incompatible with the torch>=2.4 that `transformers`
+      # requires above. If you need the GloVe demos to run, install
+      # torchtext in a SEPARATE env pinned to torch==2.3.* and
+      # torchtext==0.18.*; don't try to force it into this one.
+      # - torchtext
