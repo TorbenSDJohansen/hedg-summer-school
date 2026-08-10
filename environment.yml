@@ -1,0 +1,32 @@
+# Conda environment for the HEDG summer school slides and exercises.
+#
+# Create with:
+#   conda env create -f environment.yml
+#
+# Update after editing this file with:
+#   conda env update -f environment.yml --prune
+#
+# Used by both lecture decks via reticulate::use_condaenv("hedg-summer-school")
+# in Slides.Rmd, and by the exercises/ notebooks directly.
+name: hedg-summer-school
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - numpy
+  - pandas
+  - scikit-learn
+  - pillow
+  - matplotlib
+  - pip:
+      - torch
+      # torchtext is archived/unmaintained upstream (frozen at torch<=2.3).
+      # If `pip install torchtext` fails against a newer torch, pin torch
+      # to a compatible version, e.g. torch==2.3.*
+      - torchtext
+      - transformers
+      - histocc
+      - google-generativeai

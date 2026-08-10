@@ -28,6 +28,12 @@ xaringanExtra::use_tile_view()
 xaringanExtra::use_progress_bar(color = "#808080", location = "top")
 ```
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval=TRUE, include=TRUE, cache=TRUE)
+library(reticulate)
+use_condaenv("hedg-summer-school")
+```
+
 ```{css echo=FALSE}
 .pull-left {
   float: left;
