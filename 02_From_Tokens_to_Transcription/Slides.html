@@ -42,6 +42,8 @@ class: center, inverse, middle
   100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
 }</style>
 
+
+
 &lt;style type="text/css"&gt;
 .pull-left {
   float: left;
@@ -167,7 +169,8 @@ class: inverse, middle, center
 Tokenization works by building a dictionary for each word (or more generally token — it could be a sub-word or even character-level).
 
 For example, we may build the following dictionary:
-```python
+
+``` python
 tokenization_dict = {
     'the': 0,
     'cat': 1,
@@ -180,8 +183,9 @@ example_text = 'the cat sat on the mat'
 tokenized_text = [tokenization_dict[word] for word in example_text.split()]
 print(tokenized_text)
 ```
+
 ```
-[0, 1, 2, 3, 0, 4]
+## [0, 1, 2, 3, 0, 4]
 ```
 ]
 
@@ -197,20 +201,22 @@ As with using dummies in regressions, we now expand this categorical variable to
 --
 
 .pull-left-wide[
-```python
+.small123[
+
+``` python
 import torch
 
 one_hot_encoded = torch.nn.functional.one_hot(torch.tensor(tokenized_text))
 print(one_hot_encoded)
 ```
-.small123[
+
 ```
-tensor([[1, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 0, 1, 0],
-        [1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1]])
+## tensor([[1, 0, 0, 0, 0],
+##         [0, 1, 0, 0, 0],
+##         [0, 0, 1, 0, 0],
+##         [0, 0, 0, 1, 0],
+##         [1, 0, 0, 0, 0],
+##         [0, 0, 0, 0, 1]])
 ```
 ]
 This matrix has five columns, as we have a dictionary with five unique words, and six rows, as we have a sentence consisting of six words (of which two are the same)
@@ -221,13 +227,15 @@ This matrix has five columns, as we have a dictionary with five unique words, an
 
 .pull-left-wide[
 If we then estimated a linear model using OLS, we could make our predictions like so:
-```python
+
+``` python
 betas = torch.tensor([1, 2, 3, 5, 9])
 
 one_hot_encoded @ betas
 ```
+
 ```
-tensor([1, 2, 3, 5, 1, 9])
+## tensor([1, 2, 3, 5, 1, 9])
 ```
 
 Typically, a neural network will consist of a series of such matrix multiplications followed by some non-linearity
@@ -238,12 +246,14 @@ Typically, a neural network will consist of a series of such matrix multiplicati
 .pull-left-wide[
 &gt; **Note**: it's quite inefficient to perform the above matrix multiplication, as the first matrix is *sparse* — in practice, we'd implement this using a lookup
 
-```python
+
+``` python
 betas_lookup = dict(zip(tokenization_dict.values(), betas))
 torch.tensor([betas_lookup[token] for token in tokenized_text])
 ```
+
 ```
-tensor([1, 2, 3, 5, 1, 9])
+## tensor([1, 2, 3, 5, 1, 9])
 ```
 
 **Note**: often, we'll associate a *vector* (rather than just one number) with each token
@@ -267,15 +277,18 @@ As such, an embedding is "just" a lookup table, "looking up" `\(k\)` real number
 
 .pull-left-wide[
 Recall our earlier one-hot example with a vocabulary of five words (each word represented by a 5-dimensional sparse vector):
-```python
+
+``` python
 tokenization_dict
 ```
+
 ```
-{'the': 0, 'cat': 1, 'sat': 2, 'on': 3, 'mat': 4}
+## {'the': 0, 'cat': 1, 'sat': 2, 'on': 3, 'mat': 4}
 ```
 
 Suppose that instead of an `\(n\)`-by-5 dimensional sparse vector ($n = $ length of sentence), we create an `\(n\)`-by-2 dimensional **dense** vector
-```python
+
+``` python
 import numpy as np
 
 embedding_lookup = {
@@ -293,16 +306,18 @@ embedding_lookup = {
 
 .pull-left-wide[
 We can now use our embedding table to encode our sentence as an `\(n\)`-by-2 dimensional matrix (rather than `\(n\)`-by-6):
-```python
+
+``` python
 np.array([embedding_lookup[token] for token in tokenized_text])
 ```
+
 ```
-array([[ 0.5,  0.1],
-       [ 0.3,  0.9],
-       [ 1.2, -1.2],
-       [ 0.7,  2.3],
-       [ 0.5,  0.1],
-       [ 3.2,  1.1]])
+## array([[ 0.5,  0.1],
+##        [ 0.3,  0.9],
+##        [ 1.2, -1.2],
+##        [ 0.7,  2.3],
+##        [ 0.5,  0.1],
+##        [ 3.2,  1.1]])
 ```
 ]
 
@@ -699,7 +714,8 @@ Combining these allows us to build a HISCO classifier "from scratch" which, when
 
 .pull-left-wide[
 .tiny123[
-```python
+
+``` python
 from functools import partial
 
 import torch
@@ -729,28 +745,32 @@ def tokenize(hisco: str, max_len: int) -&gt; list[int]:
 ### Illustrating tokenizing occupational descriptions
 
 .pull-left-wide[
-```python
+
+``` python
 for char, token in zip('farmer', tokenize('farmer', 6)):
     print(f'Mapping "{char}" to "{token}"')
 ```
+
 ```
-Mapping "f" to "36"
-Mapping "a" to "31"
-Mapping "r" to "48"
-Mapping "m" to "43"
-Mapping "e" to "35"
-Mapping "r" to "48"
+## Mapping "f" to "36"
+## Mapping "a" to "31"
+## Mapping "r" to "48"
+## Mapping "m" to "43"
+## Mapping "e" to "35"
+## Mapping "r" to "48"
 ```
 ]
 
 --
 
 .pull-left-wide[
-```python
+
+``` python
 tokenize('iron works labourer', 20)  # longer example
 ```
+
 ```
-[39, 48, 45, 44, 2, 53, 45, 48, 41, 49, 2, 42, 31, 32, 45, 51, 48, 35, 48, 1]
+## [39, 48, 45, 44, 2, 53, 45, 48, 41, 49, 2, 42, 31, 32, 45, 51, 48, 35, 48, 1]
 ```
 ]
 
