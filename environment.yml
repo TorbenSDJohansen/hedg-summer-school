@@ -8,6 +8,12 @@
 #
 # Used by both lecture decks via reticulate::use_condaenv("hedg-summer-school")
 # in Slides.Rmd, and by the exercises/ notebooks directly.
+#
+# If knitting fails with "Unable to find conda binary", reticulate can't
+# auto-discover your conda install. Fix by adding a `.Renviron` file next to
+# each Slides.Rmd (gitignored - this is machine-specific) containing:
+#   RETICULATE_CONDA=/path/to/your/conda/Scripts/conda.exe   (Windows)
+#   RETICULATE_CONDA=/path/to/your/conda/bin/conda            (macOS/Linux)
 name: hedg-summer-school
 channels:
   - pytorch

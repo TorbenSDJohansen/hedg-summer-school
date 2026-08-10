@@ -166,3 +166,7 @@ Figures/kaggle_survey_2022_responses.csv
 hedg-summer-school.Rproj
 .virtual_documents/
 .Rhistory
+
+# Machine-specific reticulate/conda config - do not commit, each
+# collaborator's conda install lives at a different path.
+.Renviron
