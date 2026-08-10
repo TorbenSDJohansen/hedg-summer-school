@@ -54,7 +54,7 @@ RETICULATE_CONDA=/path/to/your/conda/Scripts/conda.exe   # Windows
 RETICULATE_CONDA=/path/to/your/conda/bin/conda            # macOS/Linux
 ```
 
-**`torchtext`** is unmaintained upstream and conflicts with the `torch` version `transformers` needs, so it's excluded from `environment.yml`. It's only needed for the GloVe embedding-space demos referenced in the original `slides_cv_version.ipynb` and `embedding_illustration.py` (not by anything the current slides or exercises execute live). If you need those to run, install `torchtext` in a separate environment pinned to `torch==2.3.*` and `torchtext==0.18.*`.
+**`torchtext`** is unmaintained upstream and conflicts with the `torch` version `transformers` needs, so it's excluded from `environment.yml`. It's only needed for the GloVe embedding-space demo in `embedding_illustration.py` (not by anything the current slides or exercises execute live). If you need that to run, install `torchtext` in a separate environment pinned to `torch==2.3.*` and `torchtext==0.18.*`.
 
 ## Building new lectures
 
