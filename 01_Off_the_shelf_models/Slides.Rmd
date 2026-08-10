@@ -1,0 +1,493 @@
+---
+output:
+  xaringan::moon_reader:
+    seal: false
+    includes:
+      after_body: insert-logo.html
+    self_contained: false
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: '16:9'
+editor_options:
+  chunk_output_type: console
+---
+class: center, inverse, middle
+
+```{r xaringan-panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r xaringan-tile-view, echo=FALSE}
+xaringanExtra::use_tile_view()
+```
+
+```{r xaringanExtra, echo = FALSE}
+xaringanExtra::use_progress_bar(color = "#808080", location = "top")
+```
+
+```{css echo=FALSE}
+.pull-left {
+  float: left;
+  width: 44%;
+}
+.pull-right {
+  float: right;
+  width: 44%;
+}
+.pull-right ~ p {
+  clear: both;
+}
+
+
+.pull-left-wide {
+  float: left;
+  width: 66%;
+}
+.pull-right-wide {
+  float: right;
+  width: 66%;
+}
+.pull-right-wide ~ p {
+  clear: both;
+}
+
+.pull-left-narrow {
+  float: left;
+  width: 30%;
+}
+.pull-right-narrow {
+  float: right;
+  width: 30%;
+}
+
+.tiny123 {
+  font-size: 0.40em;
+}
+
+.small123 {
+  font-size: 0.80em;
+}
+
+.large123 {
+  font-size: 2em;
+}
+
+.red {
+  color: red
+}
+
+.orange {
+  color: orange
+}
+
+.green {
+  color: green
+}
+```
+
+# Historical Perspectives on Current Economic Issues: Big Data and Applications
+## *AI/ML for language and vision*
+### Lecture 1: Off-the-shelf models
+
+Torben Skov Dyg Johansen ([tsdj@sam.sdu.dk](mailto:tsdj@sam.sdu.dk))
+Assistant Professor of Econometrics and Data Science at SDU
+[torbensdjohansen.github.io](https://torbensdjohansen.github.io/)
+
+Christian Vedel ([christian-vs@sam.sdu.dk](mailto:christian-vs@sam.sdu.dk))
+Assistant Professor of Economic History
+[sites.google.com/view/christianvedel](https://sites.google.com/view/christianvedel)
+
+### Updated `r Sys.Date()`
+
+---
+class: middle
+# Today's lecture
+
+.pull-left-wide[
+**Taking the plunge into using some of the tools.**
+
+- Balance between showing *what* can be done and *how* to do it — more towards *how*
+- The first bit should be fine for everyone to follow along, but difficulty increases between now and the end of tomorrow
+- Some of it will be hard, but this is an advanced class
+]
+
+.pull-right-narrow[
+![Trees](Figures/Trees1.jpg)
+]
+
+--
+
+.pull-left-wide[
+**Plan for the two days:**
+
+1. **Off-the-shelf models** *(today):* how to run advanced ML pipelines for text and image analysis in a couple of lines of code
+2. **Tokens and embedding space:** a conceptual framework to understand machine learning
+3. **Introduction to OccCANINE:** how to use it and how to build something similar (a neural network for text classification)
+4. **Transcription:** how to run transcription on scanned documents using LLMs
+]
+
+---
+class: inverse, middle, center
+# Python
+
+---
+# Python
+
+.pull-left-wide[
+- The single most important language for machine learning
+- R can do *some* stuff. But not everything we show you today
+- Easy language
+]
+
+---
+## Popular languages
+
+.center[
+![Languages](Figures/languages.png)
+]
+
+---
+## Popular frameworks
+
+.center[
+![Frameworks](Figures/frameworks.png)
+]
+
+---
+## Getting started with Python
+
+.pull-left-wide[
+### Colab
+- We will use google colab: [colab.research.google.com](https://colab.research.google.com/)
+
+### Proper setup
+- Install anaconda
+- Make environment `conda create --name my_env`
+- `conda install spyder`
+- Find *plenty* via Google
+
+### Programming logic
+- Play "The Farmer Was Replaced": [store.steampowered.com/app/2060160](https://store.steampowered.com/app/2060160/The_Farmer_Was_Replaced/)
+]
+
+---
+class: inverse, middle, center
+# HuggingFace & the `pipeline` interface
+
+---
+## HuggingFace
+
+.pull-left-wide[
+- HuggingFace is a platform for sharing machine learning models
+- Most of the most advanced pre-trained models are available here
+- You can use them *off the shelf* or finetune them. Plenty of guidance available
+]
+
+.pull-right-narrow[
+<img src="https://huggingface.co/favicon.ico" alt="HuggingFace" style="width:60px;">
+]
+
+---
+# .red[Exercise: Exploring HuggingFace]
+
+.pull-left-wide[
+- Try navigating to [HuggingFace.co](https://huggingface.co/)
+- Look for a model for one of the following tasks: Image Classification, Text Classification, Zero-Shot Classification, Translation, Sentence Similarity
+- Take a picture of yourself (or find one on the internet) and try this tool: [huggingface.co/spaces/schibsted-presplit/facial_expression_classifier](https://huggingface.co/spaces/schibsted-presplit/facial_expression_classifier)
+]
+
+---
+## `pipeline`
+
+.pull-left-wide[
+- You can interact with many of these models using the `pipeline` interface of the `transformers` library
+- You make an *instance* of a model by calling `pipeline(task = "...")`
+- You can find an overview of tasks here: [huggingface.co/docs/transformers/main/en/quicktour#pipeline](https://huggingface.co/docs/transformers/main/en/quicktour#pipeline)
+]
+
+---
+class: inverse, middle, center
+# Demonstration 1: Vision
+
+---
+# Demonstration 1: Vision
+
+.pull-left-wide[
+- Automatic image description
+- Automatic image object detection
+]
+
+.pull-right-narrow[
+![Arkiv.dk](Figures/arkivdk7055378.png)
+.small123[Picture from [arkiv.dk](https://arkiv.dk/vis/7055378)]
+]
+
+---
+## Demo 1.1: Automatic caption
+
+.pull-left-wide[
+```python
+from transformers import pipeline
+model = pipeline(
+    task="image-to-text",
+    model = "Salesforce/blip-image-captioning-base"
+)
+
+results = model("Figures/arkivdk7055378.png")
+```
+]
+
+--
+
+.pull-left-wide[
+```python
+print(results)
+```
+```
+[{'generated_text': 'two men sitting on a chair in front of a wall'}]
+```
+]
+
+---
+## Demo 1.2: Object detection
+
+.pull-left-wide[
+```python
+from transformers import pipeline
+
+model = pipeline("object-detection", model = "facebook/detr-resnet-50")
+results = model("Figures/arkivdk7055378.png")
+# ... add a bit of code to draw the objects found
+```
+]
+
+--
+
+.center[
+<img src="Figures/arkivdk7055378_annotated.png" alt="Annotated" style="height:420px;">
+]
+
+---
+## Application: reading historical images at scale
+
+.center[
+![Application](Figures/voth_yanagizawa-drott_2024.PNG)
+]
+
+---
+## Application: reading historical images at scale
+
+.center[
+<img src="Figures/voth_yanagizawa-drott_2024_fig4.PNG" alt="Figure 4" style="height:420px;">
+]
+
+.small123[Find the working paper here: [www.jvoth.com/images_july_24.pdf](https://www.jvoth.com/images_july_24.pdf)]
+
+---
+class: inverse, middle, center
+# Demonstration 2: Natural Language Processing
+
+---
+## About NLP
+
+.pull-left-wide[
+- Natural Language Processing used to be based on *Bag of Words* (BoW) and *rule-based* methods informed by Grammar and Linguistics
+- The old approach still has some merit (simple topic models, very fast compute in financial applications, etc.)
+- Instead we use *masked* transformer language models trained on next token prediction
+  - Justification: *it turns out you need to implicitly understand language to predict it*
+]
+
+---
+## Language models: a quick and dirty tour of the landscape
+
+.pull-left-wide[
+- Old models: based on LSTM
+- New models: based on transformers
+- Small Language Models: 50m to 1b parameters
+- Large Language Models: >1b parameters
+]
+
+---
+## Demo 2.1: Sentiment analysis
+
+.pull-left-wide[
+```python
+from transformers import pipeline
+classifier = pipeline(
+    task = "sentiment-analysis",
+    model = "distilbert/distilbert-base-uncased-finetuned-sst-2-english"
+)
+result = classifier("It is a lot of fun to learn advanced ML stuff.")
+```
+]
+
+--
+
+.pull-left-wide[
+```python
+print(result)
+```
+```
+[{'label': 'POSITIVE', 'score': 0.9997534155845642}]
+```
+]
+
+---
+## Demo 2.2: Named Entity Recognition
+
+.pull-left-wide[
+```python
+from transformers import pipeline
+model = pipeline(task = "ner", model = "dslim/bert-base-NER")
+result = model(
+    """
+    Mr. Edward Jameson, born on October 15, 1867, in Concord, Massachusetts,
+    is a gentleman of notable accomplishments. He received his early
+    education at the local academy and graduated with honors from Harvard
+    College in 1888. Pursuing a career in law, he quickly rose to prominence
+    through his sagacity and dedication."
+    """
+)
+```
+]
+
+--
+
+.pull-left-wide[
+.small123[
+```
+B-PER: Edward; Probability: 0.998
+I-PER: Jameson; Probability: 0.998
+B-LOC: Concord; Probability: 0.991
+B-LOC: Massachusetts; Probability: 0.999
+B-ORG: Harvard; Probability: 0.998
+I-ORG: College; Probability: 0.997
+```
+]
+]
+
+---
+## Demo 2.3: Translation
+
+.pull-left-wide[
+```python
+from transformers import pipeline
+
+translator = pipeline("translation_en_to_fr", model = "google-t5/t5-base")
+
+text = "Hello, do you like machine learning and economic history?"
+
+results = translator(text)
+```
+]
+
+--
+
+.pull-left-wide[
+```python
+for result in results:
+    print(f"Translated Text: {result['translation_text']}")
+```
+```
+Translated Text: Bonjour, aimez-vous l'apprentissage automatique et l'histoire économique ?
+```
+]
+
+---
+## Demo 2.4: Text generation from a Large*ish* Language Model
+
+.pull-left-wide[
+.small123[
+```python
+from transformers import pipeline
+import torch
+
+model = pipeline(
+    task = "text-generation",
+    model = 'HuggingFaceH4/zephyr-7b-beta',
+    torch_dtype=torch.bfloat16,
+    device_map='auto',
+    )
+result = model(
+    "The technical aspects of economic history",
+    max_length=50,
+    truncation=True,
+    )
+```
+]
+]
+
+--
+
+.pull-left-wide[
+.small123[
+```
+[{'generated_text': 'The technical aspects of economic history, such as the
+study of prices, wages, and interest rates, are also important in
+understanding the economic development of a region.
+
+In summary, economic history is a multidisciplinary field that combines'}]
+```
+]
+]
+
+---
+## Extension: you can also provide context
+
+.pull-left-wide[
+.small123[
+```python
+messages = [
+    {
+        "role": "system",
+        "content": """
+        You are a friendly econometrician who's interested in advanced
+        statistical techniques for Economic History. You want people to
+        understand the importance of advanced methods.
+        """,
+    },
+    {
+        "role": "user",
+        "content": "Can we do good economic history research without all the technicalities?"
+    },
+]
+prompt = model.tokenizer.apply_chat_template(
+    messages, tokenize=False, add_generation_prompt=True
+)
+outputs = model(
+    prompt, max_new_tokens=128, do_sample=True, temperature=0.7,
+    top_k=10, top_p=0.95
+)
+```
+]
+]
+
+--
+
+.pull-left-wide[
+.tiny123[
+```
+"As an econometrician, my answer is that while it's possible to conduct
+economic history research without advanced statistical techniques, the
+results may be less accurate and reliable. Historical data is often
+incomplete, noisy, and subject to various forms of uncertainty, which can
+make it challenging to draw meaningful conclusions without the use of
+advanced statistical methods. By applying advanced techniques like time
+series analysis, panel data models, and Bayesian methods, we can better
+account for these sources of uncertainty..."
+```
+]
+]
+
+---
+# .red[Exercise: Running advanced ML model yourself]
+
+.pull-left-wide[
+You are tasked with running an automated and scalable analysis of *Notes from the Underground* by Dostoevsky
+
+- Go to [colab.research.google.com/drive/1YmzV2A40B3KsnTycavg2I9IxLk4DS1g-?usp=sharing](https://colab.research.google.com/drive/1YmzV2A40B3KsnTycavg2I9IxLk4DS1g-?usp=sharing)
+- Copy the notebook and do the exercises
+]
