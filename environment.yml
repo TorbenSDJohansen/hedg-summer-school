@@ -28,11 +28,12 @@ dependencies:
   - pillow
   - matplotlib
   - pip:
-      - torch
-      # torchtext is archived/unmaintained upstream (frozen at torch<=2.3).
-      # If `pip install torchtext` fails against a newer torch, pin torch
-      # to a compatible version, e.g. torch==2.3.*
-      - torchtext
+      # torchtext is archived/unmaintained upstream; its compiled extension
+      # only loads against the torch version it shipped with. Pinned here -
+      # confirmed torch==2.13.* (latest at pip-resolve time) breaks
+      # torchtext's libtorchtext.pyd with "Could not load this library".
+      - torch==2.3.*
+      - torchtext==0.18.*
       - transformers
       # histocc isn't published to PyPI - install straight from GitHub
       - git+https://github.com/christianvedels/OccCANINE.git
