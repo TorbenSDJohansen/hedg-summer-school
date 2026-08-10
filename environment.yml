@@ -34,5 +34,6 @@ dependencies:
       # to a compatible version, e.g. torch==2.3.*
       - torchtext
       - transformers
-      - histocc
+      # histocc isn't published to PyPI - install straight from GitHub
+      - git+https://github.com/christianvedels/OccCANINE.git
       - google-generativeai
