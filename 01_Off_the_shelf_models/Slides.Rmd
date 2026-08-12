@@ -96,7 +96,7 @@ use_condaenv("hedg-summer-school")
 
 # Historical Perspectives on Current Economic Issues: Big Data and Applications
 ## *AI/ML for language and vision*
-### Lecture 1: Off-the-shelf models
+### Lecture 1: Off-the-shelf models & debiasing
 
 Torben Skov Dyg Johansen ([tsdj@sam.sdu.dk](mailto:tsdj@sam.sdu.dk))
 Assistant Professor of Econometrics and Data Science at SDU
@@ -115,7 +115,7 @@ class: middle
 .pull-left-wide[
 **Taking the plunge into using some of the tools.**
 
-- Balance between showing *what* can be done and *how* to do it — more towards *how*
+- Balance between showing *what* can be done and *how* to do it - more towards *how*
 - The first bit should be fine for everyone to follow along, but difficulty increases between now and the end of tomorrow
 - Some of it will be hard, but this is an advanced class
 ]
@@ -130,9 +130,9 @@ class: middle
 **Plan for the two days:**
 
 1. **Off-the-shelf models** *(today):* how to run advanced ML pipelines for text and image analysis in a couple of lines of code
-2. **Tokens and embedding space:** a conceptual framework to understand machine learning
+2. **Debiasing** *(today):* what to do when the variable in your regression came out of a model
 3. **Introduction to OccCANINE:** how to use it and how to build something similar (a neural network for text classification)
-4. **Transcription:** how to run transcription on scanned documents using LLMs
+4. **Transcription:** how to run AI transcription on scanned documents
 ]
 
 ---
@@ -497,3 +497,631 @@ You are tasked with running an automated and scalable analysis of *Notes from th
 - Go to [colab.research.google.com/drive/1YmzV2A40B3KsnTycavg2I9IxLk4DS1g-?usp=sharing](https://colab.research.google.com/drive/1YmzV2A40B3KsnTycavg2I9IxLk4DS1g-?usp=sharing)
 - Copy the notebook and do the exercises
 ]
+
+---
+class: inverse, middle, center
+# When your data is a prediction
+
+---
+## Everything we ran today produced a prediction
+
+- A caption for a photograph
+- A box around an object
+- A sentiment score for a sentence
+- A person or place picked out of a text
+- A sentence in French
+
+--
+
+Not one of them is an observation.
+Each is a model's prediction:
+
+$$\text{source } X_i \;\longrightarrow\; \hat{Z}_i = f(X_i)$$
+
+--
+
+In research, such a prediction is usually the beginning: it becomes a variable, and the variable goes into a regression
+
+--
+
+**The rest of the lecture**
+1. How we normally judge a model: **accuracy**, **precision**, **recall**, **F1**
+2. Why those numbers are not the ones we *really* care about
+3. What to do about it
+
+---
+class: inverse, middle, center
+# Measuring model quality
+
+---
+## How good is a classifier?
+
+A model sorting observations into two classes can be wrong in two different ways.
+
+|  | Actually positive | Actually negative |
+|---|---|---|
+| **Predicted positive** | true positive (*TP*) | false positive (*FP*) |
+| **Predicted negative** | false negative (*FN*) | true negative (*TN*) |
+
+--
+
+We typically measure the performance of a classifier using either:
+- **Accuracy:** share of all cases classified correctly
+- **Precision:** of the cases called positive, the share that really are
+- **Recall:** of the cases that really are positive, the share the model found
+- **F1:** the harmonic mean of precision and recall
+
+$$\text{Accuracy} = \frac{TP+TN}{n}, \qquad \text{Precision} = \frac{TP}{TP+FP}$$
+$$\text{Recall} = \frac{TP}{TP+FN}, \qquad F_1 = \frac{2\,TP}{2\,TP+FP+FN}$$
+
+---
+## Example: Classifying sex
+
+.pull-left[
+.small123[
+| Name | Truth | Predicted |
+|---|---|---|
+| Anna | female | female |
+| Elsa | female | female |
+| Maria | female | female |
+| Greta | female | female |
+| Astrid | female | male |
+| Kerstin | female | male |
+| Ola | male | female |
+| Erik | male | male |
+| Gustav | male | male |
+| Nils | male | male |
+]
+]
+
+--
+
+.pull-right[
+A classifier guessing sex from the first name. **Female** is the positive class.
+
+|  | Actual female | Actual male |
+|---|---|---|
+| **Predicted female** | 4 | 1 |
+| **Predicted male** | 2 | 3 |
+
+So $TP = 4$, $FP = 1$, $FN = 2$, $TN = 3$
+]
+
+--
+
+.pull-right[
+Accuracy $7/10 = 0.70$, precision $4/5 = 0.80$, recall $4/6 \approx 0.67$, $F_1 = \frac{2 \cdot 4}{2 \cdot 4 + 1 + 2} \approx 0.73$.
+]
+
+---
+## How good is a regressor?
+
+When the outcome is continuous, a model is not simply right or wrong. It misses by a **residual** on every observation:
+
+$$e_i = Y_i - \hat{Y}_i$$
+
+--
+
+We typically measure the performance of a regressor using either:
+- **Mean squared error:** the average squared residual
+- **R-squared:** the share of the variation in $Y$ that the model accounts for
+
+$$\text{MSE} = \frac{1}{n}\sum_{i=1}^{n}\big(Y_i - \hat{Y}_i\big)^2, \qquad R^2 = 1 - \frac{\sum_i \big(Y_i - \hat{Y}_i\big)^2}{\sum_i \big(Y_i - \bar{Y}\big)^2}$$
+
+---
+## Empirical example: Stockholm taxpayers, 1920
+
+- 3,271 individuals with first names and labor income (Bengtsson & Molinder, 2024)
+- We want the **gender wage gap**: regress log labor income on being female
+- Problem: suppose we only observe gender for some observations
+- "Solution": We have predictions of gender for all observations
+
+```{r load-stockholm, echo = F, cache.extra = file.mtime("Debiasing_exercises/Stockholm1920.csv")}
+stockholm <- read.csv("Debiasing_exercises/Stockholm1920.csv")
+head(stockholm)
+```
+
+--
+
+How often do we correctly predict someone is female?
+
+```{r, echo = F}
+table(predicted = stockholm$female_pred_binary, actual = stockholm$female)
+```
+
+---
+# .red[Exercise: Gender wage gap]
+
+Load in the Stockholm wage data from the file `Stockholm1920.csv`. Then:
+1. For observations where you observe the actual sex, compute the accuracy, precision, recall, and $F_1$-score of the predicted genders
+2. Regress `log_labor_income` on `female_pred_binary` using **all** observations. What is the estimated gender wage gap?
+3. Regress `log_labor_income` on `female` using observations where gender is observed. What is the estimated gender wage gap?
+4. Which estimate do you trust the most?
+
+**Hint**: Consider using this Colab notebook to get started: https://colab.research.google.com/drive/1oU5c9SZ9geUFAxU4hfPMU7SoN7D66No-?usp=sharing
+
+```{r exercise-gap-solution, echo = FALSE, eval = FALSE}
+cm <- table(predicted = stockholm$female_pred_binary, actual = stockholm$female)
+c(accuracy = sum(diag(cm))/sum(cm), precision = cm[2,2]/sum(cm[2,]), recall = cm[2,2]/sum(cm[,2]), f1 = 2*cm[2,2]/(2*cm[2,2]+cm[2,1]+cm[1,2]))
+
+summary(lm(log_labor_income ~ female_pred_binary, data = stockholm))
+
+summary(lm(log_labor_income ~ female, data = stockholm))
+```
+
+---
+class: inverse, middle, center
+# What is the problem?
+
+---
+## We measured the wrong thing
+
+We do not ultimately care about a classifier's accuracy.
+We care about
+1. whether $\hat{\beta}$ is centered on the truth (unbiased - or at least consistent)
+1. how precisely we measure it (efficiency)
+
+Let us compare our two estimates as well as the "truth"
+
+--
+
+```{r comparison-table, echo = F, results = "asis"}
+b <- function(f) summary(f)$coefficients[2, 1:2]
+ci <- function(x) sprintf("[%.3f, %.3f]", x[1] - 1.96*x[2], x[1] + 1.96*x[2])
+naive <- b(lm(log_labor_income ~ female_pred_binary, stockholm))
+gold <- b(lm(log_labor_income ~ female, stockholm))
+knitr::kable(data.frame(
+  Estimator = c("Truth", "Naive (predicted sex, all)", "Gold standard (observed sex only)"),
+  Estimate = sprintf("%.3f", c(-0.822, naive[1], gold[1])),
+  `95% CI` = c("", ci(naive), ci(gold)),
+  check.names = FALSE
+), format = "markdown", row.names = FALSE)
+```
+
+--
+
+- Our estimate using predictions is clearly biased ...
+- ... but our estimate using only observed gender is measured less precisely
+
+---
+
+## The same three estimates
+
+.center[
+<img src="Figures/stockholm_coefplot.png" alt="Gender wage gap estimates, Stockholm 1920" style="width:92%;">
+]
+
+.small123[
+Dashed line: the "true" gap. Solid line: no gap at all. Bars are 95% confidence intervals
+]
+
+---
+## Two kinds of measurement error
+
+|  | Classical | ML prediction |
+|---|---|---|
+| Structure | random noise | systematic |
+| Effect on the coefficient | attenuation | any direction, any size |
+
+--
+
+Errors in our setting
+- Recall is 66.2%, so 33.8% of women are labelled men.
+- Precision is 98.0%, so men are almost never labelled women
+
+--
+
+The misclassification sits almost entirely in one class.
+It does not average out, and it pushes the coefficient in one direction
+
+--
+
+Egami et al. (2024): precision above 90–95% can still produce bias large enough to **flip the sign** of a coefficient
+
+---
+class: inverse, middle, center
+# Debiasing
+
+---
+## Debiasing
+
+Debiasing provides a way for us to combine the best of our two previous estimates
+1. Use our ML predictions for precision
+1. Use our subset of "gold standard" labels to correct the bias
+
+--
+
+Let us focus on the simplest possible setting, namely estimation of a mean of a variable $Y$.
+Our setting:
+- $N$ observations $(R_iY_i, \hat{Y}_i, X_i, R_i)$
+- For each we have features $X_i$ and a prediction $\hat{Y}_i = f(X_i)$
+- For a random subset $n \ll N$ we observe $Y_i$. Let $R_i = 1$ for those and otherwise $0$. Suppose those are the first $n$ observations
+
+Let us consider different estimation strategies for the mean of $Y$
+
+---
+## Option 1: use only what you know
+
+$$\hat{\theta}_{GS} = \frac{1}{n}\sum_{i=1}^{n} Y_i$$
+
+**Unbiased**, because the subset was drawn at random
+
+--
+
+But it discards $N-n$ observations. Noisy
+
+---
+## Option 2: use all the predictions
+
+$$\hat{\theta}_{ML} = \frac{1}{N}\sum_{i=1}^{N} f(X_i)$$
+
+**Precise**, because it uses everything
+
+--
+
+But biased by the average prediction error, which we have no reason to believe is zero
+
+---
+## Option 3: the step in between
+
+On the labelled subset we can see **both** $f(X_i)$ and $Y_i$.
+We can thus simply measure the bias:
+
+$$\widehat{\text{bias}} = \frac{1}{n}\sum_{i=1}^{n}\big(f(X_i) - Y_i\big)$$
+
+--
+
+We can now combine this bias correction with our full set of ML predictions
+
+$$\hat{\theta}_{\text{DB}} = \frac{1}{N - n} \sum_{i = n + 1}^N f(X_i) - \underbrace{\frac{1}{n} \sum_{i = 1}^n \left( f(X_i) - Y_i \right)}_{\text{Bias correction term}}$$
+
+---
+## Debiasing frameworks
+
+The two most prominent methods for debiasing are **prediction-powered inference** (PPI; Angelopoulos et al., 2023) and design-based supervised learning (DSL; Egami et al., 2023, 2024).
+On the previous slide, we used PPI for debiasing
+
+--
+
+The core idea of both approaches is to correct predictions by estimating bias on a subset of observations for which "gold standard" labels are available
+
+--
+
+**DSL** does the same job by building a *pseudo outcome* for every observation and then simply averaging it
+
+$$\tilde{Y}_i = f(X_i) + \frac{R_i}{\pi}\big(Y_i - f(X_i)\big), \qquad \hat{\theta}_{\text{DSL}} = \frac{1}{N}\sum_{i=1}^{N} \tilde{Y}_i$$
+
+where $\pi$ is the probability that an observation gets a gold-standard label (here $\pi \approx n/N$)
+
+--
+
+**Note**: Both PPI and DSL differ once we move on from simple mean estimation, but the core idea remains the same
+
+---
+## Why it works
+
+**Validity comes from the sampling design, not from the model**
+
+The subset is a random draw, so the measured error is an unbiased estimate of the true average error, whatever the model happens to do
+
+--
+
+**The model buys precision**
+
+The variance depends on how much the prediction errors vary.
+A weak model costs you precision, not unbiasedness
+
+---
+# .red[Exercise: Estimation of a mean]
+
+Let $X_i \sim U(0,1)$ and $Y_i = 2X_i$, so the true mean is $\theta = 1$.
+Use the deliberately imperfect predictor $f(X_i) = 2.1 X_i - 0.5 X_i^2$
+
+1. Generate a random sample of size $N = 1000$ according to the above data generating process (DGP). Remove $Y_i$ from 90% of the sample
+2. Compute all three estimators from the last few slides (options 1-3)
+3. Repeat 1,000 times and plot the three distributions. Which is the best estimator?
+
+**Hint**: Consider using this Colab notebook to get started: https://colab.research.google.com/drive/1vqQLGcDtViuZhcm6GmytBxexqHdK-9Vj?usp=sharing
+
+```{r, echo = FALSE, eval = FALSE}
+
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+dgp_true = function(N, pi) {
+  X = runif(N)
+  Y = 2 * X
+  R = rbinom(N, size = 1, prob = pi)
+
+  data.frame(Y = Y, X = X, R = R)
+}
+
+ml_predictor = function(X) {
+  Y_pred = 2.1 * X - 0.5 * X^2
+
+  return(Y_pred)
+}
+
+estimator_gs = function(data) {
+  theta_hat_gs = mean(data[data$R == 1, 'Y'])
+
+  theta_hat_gs_se = sd(data[data$R == 1, 'Y']) / sqrt(sum(data$R))
+
+  return(c(theta_hat_gs, theta_hat_gs_se))
+}
+
+estimator_ml = function(data) {
+  theta_hat_ml = mean(data$Y_pred)
+
+  theta_hat_ml_se = sd(data$Y_pred) / sqrt(NROW(data))
+
+  return(c(theta_hat_ml, theta_hat_ml_se))
+}
+
+estimator_ppi = function(data) {
+  data_gs = data[data$R == 1, ]
+  data_ml = data[data$R == 0, ]
+
+  residuals = data_gs$Y_pred - data_gs$Y
+
+  theta_hat_ppi = mean(data_ml$Y_pred) - mean(residuals)
+
+  theta_hat_ppi_se = sqrt(var(residuals) / NROW(data_gs) + var(data_ml$Y_pred) / NROW(data_ml))
+
+  return(c(theta_hat_ppi, theta_hat_ppi_se))
+}
+
+set.seed(42)
+
+N = 1000
+pi = 0.1
+num_simulations = 10000
+
+estimates = matrix(nrow = num_simulations, ncol = 3)
+std_errs = matrix(nrow = num_simulations, ncol = 3)
+
+for (rep in 1:num_simulations) {
+  data = dgp_true(N, pi)
+  data$Y_pred = ml_predictor(data$X)
+
+  # Using only gold-standard data
+  est_and_se_gs = estimator_gs(data)
+  estimates[rep, 1] = est_and_se_gs[1]
+  std_errs[rep, 1] = est_and_se_gs[2]
+
+  # Naively using ML predictions
+  est_and_se_ml = estimator_ml(data)
+  estimates[rep, 2] = est_and_se_ml[1]
+  std_errs[rep, 2] = est_and_se_ml[2]
+
+  # PPI
+  est_and_se_ppi = estimator_ppi(data)
+  estimates[rep, 3] = est_and_se_ppi[1]
+  std_errs[rep, 3] = est_and_se_ppi[2]
+}
+
+df_long = as.data.frame(estimates) %>%
+  setNames(c("Gold standard", "Naïve ML", "PPI")) %>%
+  pivot_longer(cols = everything(), names_to = "estimator", values_to = "estimate")
+
+estimator_colours = c(
+  "Gold standard" = "blue",
+  "Naïve ML" = "red",
+  "PPI" = "green"
+)
+
+df_long %>%
+  ggplot(aes(x = estimate, fill = estimator, color = estimator)) +
+  geom_density(alpha = 0.25, linewidth = 0.8, adjust = 1) +
+  geom_vline(xintercept = 1, linetype = "dashed") +
+  scale_fill_manual(values = estimator_colours) +
+  scale_color_manual(values = estimator_colours) +
+  theme_minimal() +
+  labs(x = "Estimate", y = "Density", fill = "Estimator", color = "Estimator")
+
+# R^2 for last run (>99%)
+summary(lm(Y_pred ~ Y, data = data))
+```
+
+---
+
+## PPI versus DSL
+
+.pull-left-wide[
+<img src="Figures/ppi-vs-dsl-lhs.png" alt="PPI versus DSL when estimating a mean" style="width:100%;">
+]
+
+.pull-right-narrow[
+.small123[
+**Coverage of the nominal 95% CI**
+
+| Estimator | Coverage (%) |
+|---|---|
+| Oracle | 94.87 |
+| Gold standard | 94.69 |
+| Naïve ML | 0.00 |
+| PPI | 94.87 |
+| DSL | 94.83 |
+
+Dashed line: the true mean of 1.
+Same DGP as the previous exercise.
+Results based on 100,000 simulations
+
+]
+]
+
+---
+## When debiasing does **not** work
+
+- **Convenience sampling**: Coding the first 300 records is not a design. Sampling must be random
+- **Unknown selection probabilities**: Every observation needs a known, strictly positive $\pi_i$.
+- **Reusing observations** to fit the model *and* measure its bias. Cross-fit instead
+- **A biased source.** Debiasing corrects model bias, not source bias
+
+--
+
+The correction is only as good as the $n$ labels behind it.
+Source criticism comes before the codebook. Document the rules, the disagreements, and who did the coding
+
+*ML complements the "careful historian." It does not replace them*
+
+---
+## Beyond estimation of means
+
+While the mathematics get slightly more complicated, the core idea behind debiasing extends to
+- Predictions on the **right-hand side** of a regression (e.g., the Stockholm example)
+- Regression coefficients generally: linear, logistic, Poisson, ...
+- High-dimensional fixed effects
+- IV, difference-in-differences, regression discontinuity (Carlson & Dell, 2025)
+
+**Software**: `ppi-python` in Python, and the `dsl` package in R
+
+---
+### DSL for correcting a right-hand side variable
+
+In the Stockholm regression, the predicted variable is a *regressor*.
+Call it $Z_i$ (sex), with outcome $Y_i$ (log income) observed for everyone
+
+DSL then replaces each ingredient of the OLS slope by a pseudo outcome
+
+\begin{align*}
+    \tilde{Z}_i &:= f(X_i) + \frac{R_i}{\pi}\left( Z_i - f(X_i) \right) & \text{Predicted values for } Z_i
+    \\
+    \widetilde{Z_i^2} &:= f(X_i)^2 + \frac{R_i}{\pi}\left( Z_i^2 - f(X_i)^2 \right) & \text{Predicted values for } Z_i^2
+    \\
+    \widetilde{Z_iY_i} &:= f(X_i) Y_i + \frac{R_i}{\pi}\left( Z_i Y_i - f(X_i) Y_i \right) & \text{Predicted values for } Z_iY_i,
+\end{align*}
+
+--
+
+Once we have our pseudo outcomes, the DSL estimator of the slope is
+
+\begin{align*}
+    \hat{\beta}_{\text{DSL}} = \frac{\frac{1}{N}\sum_{i = 1}^N \widetilde{Z_iY_i} - (\frac{1}{N}\sum_{i = 1}^N \tilde{Z}_i)(\frac{1}{N}\sum_{i = 1}^N Y_i)}{\frac{1}{N}\sum_{i = 1}^N \widetilde{Z_i^2} - (\frac{1}{N}\sum_{i = 1}^N \tilde{Z}_i)^2},
+\end{align*}
+
+---
+## Using `ppi-python`
+
+Let us generate a single draw according to the previous exercise's DGP
+
+```{python ppi-setup, cache = FALSE}
+import numpy as np
+
+from ppi_py import ppi_mean_pointestimate, ppi_mean_ci
+
+rng = np.random.default_rng(42)
+
+N, pi = 1000, 0.1
+
+X = rng.uniform(size = N)
+Y = 2 * X
+R = rng.binomial(1, pi, size = N)
+
+Y_pred = 2.1 * X - 0.5 * X**2
+```
+
+---
+## Using `ppi-python`
+
+```{python ppi-estimate, comment = "", cache = FALSE}
+Y_gs = Y[R == 1]
+Y_pred_gs = Y_pred[R == 1]
+Y_pred_ml = Y_pred[R == 0]
+
+theta = ppi_mean_pointestimate(Y_gs, Y_pred_gs, Y_pred_ml)
+lo, hi = ppi_mean_ci(Y_gs, Y_pred_gs, Y_pred_ml, alpha = 0.05)
+theta, lo, hi = [np.asarray(v).item() for v in (theta, lo, hi)]
+
+print(f"PPI: {theta:.3f}  [{lo:.3f}, {hi:.3f}]")
+print(f"Naive: {Y_pred.mean():.3f}")
+print(f"Gold: {Y_gs.mean():.3f}")
+```
+
+---
+
+## Why this matters especially for us
+
+.pull-left-wide[
+<img src="Figures/accuracy_f1_over_time_openai.png" alt="Classifier performance by period of linguistic style" style="width:100%;">
+]
+
+.pull-right-narrow[
+.small123[
+Take 200 texts with human emotion labels. Have an LLM rewrite each one in the English of a given period, then score them all with the same BERT classifier
+
+On the original text: accuracy 0.82, macro F1 0.67
+
+By 1200: accuracy 0.37
+
+Note that LLM-rewritten prose is *easier* than a genuine historical source. This understates the problem
+]
+]
+
+---
+## Even frontier models
+
+.pull-left-wide[
+<img src="Figures/llm_vs_human_accuracy_f1.png" alt="LLM versus human labels on seventeenth century text" style="width:100%;">
+]
+
+.pull-right-narrow[
+.small123[
+200 paragraphs of real seventeenth-century English (EEBO), labelled by a frontier LLM (ChatGPT 5.5) and, independently, by us
+
+Accuracy looks excellent: a macro average of 0.94
+
+F1 is 0.69 overall, and 0.60 for irony
+]
+]
+
+---
+# .red[Exercise: Fixing the Stockholm estimate]
+
+Load in the Stockholm wage data from the file `Stockholm1920.csv`. Then:
+1. Use DSL as shown previously to obtain a debiased version of the gender wage gap estimate
+1. Compare with the results from the previous exercise. Which is the best estimate?
+
+**Hint**: Consider using this Colab notebook to get started: https://colab.research.google.com/drive/1LI1uYDJwrjYXGAs0FekzbvG8tlXN44Zy?usp=sharing
+
+```{python stockholm-dsl-py, comment = "", cache = FALSE, echo = FALSE, eval = FALSE}
+import numpy as np, pandas as pd
+
+d = pd.read_csv("Debiasing_exercises/Stockholm1920.csv")
+
+def dsl_gap(df):
+    Y = df["log_labor_income"].to_numpy()
+    Z_pred = df["female_pred"].to_numpy(float)
+    R = df["R"].to_numpy(float)
+    Z = df["female"].fillna(0).to_numpy(float)
+    pi = R.mean()
+
+    Zt = Z_pred + R / pi * (Z - Z_pred)           # the pseudo outcomes
+    Zt2 = Z_pred**2  + R / pi * (Z**2 - Z_pred**2)
+    ZtY = Z_pred * Y + R / pi * (Z * Y - Z_pred * Y)
+
+    return (ZtY.mean() - Zt.mean() * Y.mean()) / (Zt2.mean() - Zt.mean()**2)
+
+print(f"DSL gap: {dsl_gap(d):.3f}")
+```
+
+---
+## Using DSL to correct our estimate
+
+.center[
+<img src="Figures/stockholm_dsl_coefplot.png" alt="Gender wage gap estimates, Stockholm 1920" style="width:92%;">
+]
+
+.small123[
+Dashed line: the "true" gap. Solid line: no gap at all. Bars are 95% confidence intervals
+]
+
+---
+## What to take away
+
+1. Every ML output is a prediction and its errors are systematic rather than random
+2. Standard performance scores do not detect the resulting bias in your estimate
+3. A small **random** sample of hand-coded "gold standard" labels lets you measure the bias and correct it
+4. Validity comes from the **sampling design** - the ML model only buys precision
+5. This covers much of what economic history does with ML

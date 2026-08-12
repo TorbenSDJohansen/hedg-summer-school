@@ -174,3 +174,5 @@ hedg-summer-school.Rproj
 # knitr chunk cache (from cache=TRUE in Slides.Rmd) - local build
 # artifact, regenerates automatically, shouldn't be committed.
 Slides_cache/
+/Tools
+/.vscode
