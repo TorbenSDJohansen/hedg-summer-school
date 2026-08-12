@@ -96,7 +96,7 @@ use_condaenv("hedg-summer-school")
 
 # Historical Perspectives on Current Economic Issues: Big Data and Applications
 ## *AI/ML for language and vision*
-### Lecture 1: Off-the-shelf models
+### Lecture 1: Off-the-shelf models & debiasing
 
 Torben Skov Dyg Johansen ([tsdj@sam.sdu.dk](mailto:tsdj@sam.sdu.dk))
 Assistant Professor of Econometrics and Data Science at SDU
@@ -130,9 +130,9 @@ class: middle
 **Plan for the two days:**
 
 1. **Off-the-shelf models** *(today):* how to run advanced ML pipelines for text and image analysis in a couple of lines of code
-2. **Tokens and embedding space:** a conceptual framework to understand machine learning
+2. **Debiasing** *(today):* what to do when the variable in your regression came out of a model
 3. **Introduction to OccCANINE:** how to use it and how to build something similar (a neural network for text classification)
-4. **Transcription:** how to run transcription on scanned documents using LLMs
+4. **Transcription:** how to run AI transcription on scanned documents
 ]
 
 ---
@@ -496,4 +496,429 @@ You are tasked with running an automated and scalable analysis of *Notes from th
 
 - Go to [colab.research.google.com/drive/1YmzV2A40B3KsnTycavg2I9IxLk4DS1g-?usp=sharing](https://colab.research.google.com/drive/1YmzV2A40B3KsnTycavg2I9IxLk4DS1g-?usp=sharing)
 - Copy the notebook and do the exercises
+]
+
+---
+class: inverse, middle, center
+# When your data is a prediction
+
+---
+## Everything we ran today produced a prediction
+
+- A caption for a photograph
+- A box around an object
+- A sentiment score for a sentence
+- A person or place picked out of a text
+- A sentence in French
+
+--
+
+Not one of them is an observation.
+Each is a model's prediction:
+
+$$\text{source } X_i \;\longrightarrow\; \hat{Z}_i = f(X_i)$$
+
+--
+
+In research, such a prediction is usually the beginning: it becomes a variable, and the variable goes into a regression
+
+--
+
+**The rest of the lecture**
+1. How we normally judge a model: **accuracy**, **precision**, **recall**, **F1**
+2. Why those numbers are not the ones we *really* care about
+3. What to do about it
+
+---
+class: inverse, middle, center
+# Measuring model quality
+
+---
+## How good is a classifier?
+
+A model sorting observations into two classes can be wrong in two different ways.
+
+|  | Actually positive | Actually negative |
+|---|---|---|
+| **Predicted positive** | true positive (*TP*) | false positive (*FP*) |
+| **Predicted negative** | false negative (*FN*) | true negative (*TN*) |
+
+--
+
+We typically measure the performance of a classifier using either:
+- **Accuracy:** share of all cases classified correctly
+- **Precision:** of the cases called positive, the share that really are
+- **Recall:** of the cases that really are positive, the share the model found
+- **F1:** the harmonic mean of precision and recall
+
+$$\text{Accuracy} = \frac{TP+TN}{n}, \qquad \text{Precision} = \frac{TP}{TP+FP}$$
+$$\text{Recall} = \frac{TP}{TP+FN}, \qquad F_1 = \frac{2\,TP}{2\,TP+FP+FN}$$
+
+---
+## Example: Classifying sex
+
+.pull-left[
+.small123[
+| Name | Truth | Predicted |
+|---|---|---|
+| Anna | female | female |
+| Elsa | female | female |
+| Maria | female | female |
+| Greta | female | female |
+| Astrid | female | male |
+| Kerstin | female | male |
+| Ola | male | female |
+| Erik | male | male |
+| Gustav | male | male |
+| Nils | male | male |
+]
+]
+
+--
+
+.pull-right[
+A classifier guessing sex from the first name. **Female** is the positive class.
+
+|  | Actual female | Actual male |
+|---|---|---|
+| **Predicted female** | 4 | 1 |
+| **Predicted male** | 2 | 3 |
+
+So $TP = 4$, $FP = 1$, $FN = 2$, $TN = 3$
+]
+
+--
+
+.pull-right[
+Accuracy $7/10 = 0.70$, precision $4/5 = 0.80$, recall $4/6 \approx 0.67$, $F_1 = \frac{2 \cdot 4}{2 \cdot 4 + 1 + 2} \approx 0.73$.
+]
+
+---
+## Stockholm taxpayers, 1920
+
+- 3,271 individuals with first names and labor income (Bengtsson & Molinder, 2024)
+- We want the **gender wage gap**: regress log labor income on being female
+- Problem: suppose we only observe gender for some observations
+- "Solution": We have predictions of gender for all observations
+
+```{r load-stockholm, echo = F}
+stockholm <- read.csv("Debiasing_exercises/Stockholm1920.csv")
+head(stockholm)
+```
+
+--
+
+How often do we correctly predict someone is female?
+
+```{r, echo = F}
+table(predicted = stockholm$female_pred, actual = stockholm$female)
+```
+
+---
+# .red[Exercise: Gender wage gap]
+
+**TODO** refer to notebook
+
+1. For observations where you observe the actual sex, compute the accuracy, precision, recall, and $F_1$-score of the predicted genders
+2. Regress `log_labor_income` on `female_pred` using **all** observations. What is the estimated gender wage gap?
+3. Regress `log_labor_income` on `female` using observations where gender is observed. What is the estimated gender wage gap?
+4. Which estimate do you trust the most?
+
+```{r exercise-gap-solution, echo = FALSE, eval = FALSE}
+cm <- table(predicted = stockholm$female_pred, actual = stockholm$female)
+c(accuracy = sum(diag(cm))/sum(cm), precision = cm[2,2]/sum(cm[2,]), recall = cm[2,2]/sum(cm[,2]), f1 = 2*cm[2,2]/(2*cm[2,2]+cm[2,1]+cm[1,2]))
+
+summary(lm(log_labor_income ~ female_pred, data = stockholm))
+
+summary(lm(log_labor_income ~ female, data = stockholm))
+```
+
+---
+class: inverse, middle, center
+# What is the problem?
+
+---
+## We measured the wrong thing
+
+We do not ultimately care about a classifier's accuracy.
+We care about
+1. whether $\hat{\beta}$ is centered on the truth (unbiased - or at least consistent)
+1. how precisely we measure it (efficiency)
+
+Let us compare our two estimates as well as the "truth"
+
+--
+
+```{r comparison-table, echo = F, results = "asis"}
+b <- function(f) summary(f)$coefficients[2, 1:2]
+ci <- function(x) sprintf("[%.3f, %.3f]", x[1] - 1.96*x[2], x[1] + 1.96*x[2])
+naive <- b(lm(log_labor_income ~ female_pred, stockholm))
+gold <- b(lm(log_labor_income ~ female, stockholm))
+knitr::kable(data.frame(
+  Estimator = c("Truth", "Naive (predicted sex, all)", "Gold standard (observed sex only)"),
+  Estimate = sprintf("%.3f", c(-0.822, naive[1], gold[1])),
+  `95% CI` = c("", ci(naive), ci(gold)),
+  check.names = FALSE
+), format = "markdown", row.names = FALSE)
+```
+
+--
+
+- Our estimate using predictions is clearly biased ...
+- ... but our estimate using only observed gender is measured imprecisely
+
+---
+
+**TODO figure from paper**
+
+---
+## Two kinds of measurement error
+
+|  | Classical | ML prediction |
+|---|---|---|
+| Structure | random noise | systematic |
+| Effect on the coefficient | attenuation | any direction, any size |
+
+--
+
+Errors in our setting
+- Recall is 66.2%, so 33.8% of women are labelled men.
+- Precision is 98.0%, so men are almost never labelled women
+
+--
+
+The misclassification sits almost entirely in one class. 
+It does not average out, and it pushes the coefficient in one direction
+
+--
+
+Egami et al. (2024): precision above 90-95% can still produce bias large enough to **flip the sign** of a coefficient
+
+---
+class: inverse, middle, center
+# Debiasing
+
+---
+## The setting
+
+.pull-left-wide[
+$N$ observations. For each we have features $X_i$ and a prediction $f(X_i)$.
+
+For a random subset of $n \ll N$ we also paid someone to establish the truth $Y_i$. Let $R_i = 1$ for those.
+]
+
+--
+
+.pull-left-wide[
+In the Stockholm data, $N = 3{,}271$ and $n = 330$.
+
+Start with the simplest possible target, the mean $\theta = \mathbb{E}[Y_i]$.
+]
+
+---
+## Option 1: use only what you know
+
+.pull-left-wide[
+$$\hat{\theta}_{GS} = \frac{1}{n}\sum_{i=1}^{n} Y_i$$
+
+**Unbiased**, because the subset was drawn at random.
+]
+
+--
+
+.pull-left-wide[
+But it discards $N-n$ observations. Noisy.
+]
+
+---
+## Option 2: use all the predictions
+
+.pull-left-wide[
+$$\hat{\theta}_{ML} = \frac{1}{N}\sum_{i=1}^{N} f(X_i)$$
+
+**Precise**, because it uses everything.
+]
+
+--
+
+.pull-left-wide[
+And biased by exactly the average prediction error, which we have no reason to believe is zero.
+]
+
+---
+## The step in between
+
+.pull-left-wide[
+On the labelled subset we can see **both** $f(X_i)$ and $Y_i$.
+
+So we can simply measure the average error:
+
+$$\widehat{\text{bias}} = \frac{1}{n}\sum_{i=1}^{n}\big(f(X_i) - Y_i\big)$$
+]
+
+--
+
+.pull-left-wide[
+That is the entire idea. Everything else is bookkeeping.
+]
+
+---
+## Option 3: predictions, corrected
+
+.pull-left-wide[
+$$\hat{\theta}_{DB} = \frac{1}{N-n}\sum_{i=n+1}^{N} f(X_i) \;-\; \frac{1}{n}\sum_{i=1}^{n}\big(f(X_i) - Y_i\big)$$
+]
+
+--
+
+.pull-left-wide[
+- **First term:** average the predictions over the unlabelled sample
+- **Second term:** subtract the error you measured on the labelled one
+]
+
+--
+
+.pull-left-wide[
+Two names for this in the literature: **prediction-powered inference** (PPI) and **design-based supervised learning** (DSL).
+]
+
+---
+## Why it works
+
+.pull-left-wide[
+**Validity comes from the sampling design, not from the model.**
+
+The subset is a random draw, so the measured error is an unbiased estimate of the true average error, whatever the model happens to do.
+]
+
+--
+
+.pull-left-wide[
+**The model buys precision.**
+
+The variance depends on how much the prediction errors vary, not on how much $Y$ varies. A good model makes the correction small and stable.
+]
+
+--
+
+.pull-left-wide[
+A weak model costs you precision, never unbiasedness.
+]
+
+---
+# .red[Exercise 2: Does it actually work?]
+
+.pull-left-wide[
+Simulated data, where you know the answer. Let $X_i \sim U(0,1)$ and $Y_i = 2X_i$, so the
+true mean is $\theta = 1$. Use the deliberately imperfect predictor
+$f(X_i) = 2.1 X_i - 0.5 X_i^2$.
+
+Take $N = 1{,}000$ and label a random $n = 100$.
+
+1. Compute all three estimators from the last few slides
+2. Repeat 1,000 times and plot the three distributions
+3. What share of your **naive** 95% intervals contain the truth?
+]
+
+---
+## What breaks it
+
+.pull-left-wide[
+- **Convenience samples.** Coding the first 300 records is not a design.
+- **Unknown selection probabilities.** Every observation needs a known, strictly positive $\pi_i$.
+- **Reusing observations** to fit the model *and* measure its bias. Cross-fit instead.
+- **A biased source.** This corrects the model, not the archive.
+]
+
+---
+## The labels are the hard part
+
+.pull-left-wide[
+The correction is only as good as the $n$ labels behind it.
+
+Ambiguity rises from **numbers**, through **occupations**, to **semantics**. At the left end the task is hard for the model and trivial for a human; at the right end it needs someone who knows the period.
+]
+
+--
+
+.pull-left-wide[
+Source criticism comes before the codebook. Document the rules, the disagreements, and who did the coding.
+
+**ML complements the careful historian. It does not replace them.**
+]
+
+---
+## Beyond a mean
+
+.pull-left-wide[
+The same logic reaches much further:
+
+- Predictions on the **right-hand side** of a regression, which is the Stockholm case
+- Regression coefficients generally: linear, logistic, Poisson
+- High-dimensional fixed effects
+- IV, difference-in-differences, regression discontinuity
+]
+
+--
+
+.pull-left-wide[
+Software: `ppi-python` in Python, and the `dsl` package in R. Both wrap around **any** black-box model, with no retraining required.
+]
+
+---
+## Where it applies, and where it does not
+
+.pull-left-wide[
+**Type 1, ML replaces a human annotator.** Classification, linking, labeling. A gold standard can always be built, so this always works. *Most of what the field does.*
+]
+
+--
+
+.pull-left-wide[
+**Type 2, ML fills in genuinely missing data.** Works if you can validate within the source.
+]
+
+--
+
+.pull-left-wide[
+**Type 3, ML builds a new measure.** No human could produce the label, so there is no gold standard and no debiasing. Validate against multiple proxies and placebo tests instead.
+]
+
+---
+# .red[Exercise 3: Fixing the Stockholm estimate]
+
+.pull-left-wide[
+Back to the regression you broke in Exercise 1. The 330 rows with `R == 1` are your gold standard.
+
+1. Estimate the gap using **only** those 330 rows
+2. Now apply the correction, using all 3,271 predictions
+3. Compare all four estimates against the true value of $-0.822$
+]
+
+--
+
+.pull-left-wide[
+| Estimator | Estimate | 95% CI |
+|---|---|---|
+| Naive | âˆ’0.713 | [âˆ’0.767, âˆ’0.658] |
+| Gold standard only | âˆ’0.760 | [âˆ’0.908, âˆ’0.612] |
+| Debiased | âˆ’0.814 | [âˆ’0.909, âˆ’0.719] |
+| Oracle | âˆ’0.822 | [âˆ’0.871, âˆ’0.774] |
+]
+
+---
+## What to take away
+
+.pull-left-wide[
+1. Every ML output is a **prediction**, and its errors are systematic rather than random
+2. **No performance score** detects the resulting bias in your estimate
+3. A small **random** sample of hand-coded labels lets you measure that bias and subtract it
+4. Validity comes from the **sampling design**; the model only buys precision
+5. This covers most of what economic history does with ML
+]
+
+--
+
+.pull-left-wide[
+**Better models do not remove the need for research design. They make good research design more valuable.**
 ]
