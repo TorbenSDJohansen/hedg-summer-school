@@ -816,7 +816,7 @@ A weak model costs you precision, not unbiasedness
 Let $X_i \sim U(0,1)$ and $Y_i = 2X_i$, so the true mean is $\theta = 1$. 
 Use the deliberately imperfect predictor $f(X_i) = 2.1 X_i - 0.5 X_i^2$
 
-1. Generate a random sample of size $N = 1000$ according to the above data generating process. Remove $Y_i$ from 90% of the sample
+1. Generate a random sample of size $N = 1000$ according to the above data generating process (DGP). Remove $Y_i$ from 90% of the sample
 2. Compute all three estimators from the last few slides (options 1-3)
 3. Repeat 1,000 times and plot the three distributions. Which is the best estimator?
 
@@ -920,52 +920,134 @@ df_long %>%
 
 ---
 
-**TODO slide with figure ppi-vs-dsl-lhs.png and a coverage table based on numbers from ppi-vs-dsl-lhs-coverage.tex**
-
----
-## What breaks it
+## PPI versus DSL
 
 .pull-left-wide[
-- **Convenience samples.** Coding the first 300 records is not a design.
-- **Unknown selection probabilities.** Every observation needs a known, strictly positive $\pi_i$.
-- **Reusing observations** to fit the model *and* measure its bias. Cross-fit instead.
-- **A biased source.** This corrects the model, not the archive.
+<img src="Figures/ppi-vs-dsl-lhs.png" alt="PPI versus DSL when estimating a mean" style="width:100%;">
+]
+
+.pull-right-narrow[
+.small123[
+**Coverage of the nominal 95% CI**
+
+| Estimator | Coverage (%) |
+|---|---|
+| Oracle | 94.87 |
+| Gold standard | 94.69 |
+| Naïve ML | 0.00 |
+| PPI | 94.87 |
+| DSL | 94.83 |
+
+Dashed line: the true mean of 1.
+Same DGP as the previous exercise.
+Results based on 100,000 simulations
+
+]
 ]
 
 ---
-## The labels are the hard part
+## When debiasing does **not** work
 
-.pull-left-wide[
+- **Convenience sampling**: Coding the first 300 records is not a design. Sampling must be random
+- **Unknown selection probabilities**: Every observation needs a known, strictly positive $\pi_i$.
+- **Reusing observations** to fit the model *and* measure its bias. Cross-fit instead
+- **A biased source.** Debiasing corrects model bias, not source bias
+
+--
+
 The correction is only as good as the $n$ labels behind it.
+Source criticism comes before the codebook. Document the rules, the disagreements, and who did the coding
 
-Ambiguity rises from **numbers**, through **occupations**, to **semantics**. At the left end the task is hard for the model and trivial for a human; at the right end it needs someone who knows the period.
-]
+*ML complements the "careful historian." It does not replace them*
+
+---
+## Beyond estimation of means
+
+While the mathematics get slightly more complicated, the core idea behind debiasing extends to
+- Predictions on the **right-hand side** of a regression (e.g., the Stockholm example)
+- Regression coefficients generally: linear, logistic, Poisson, ...
+- High-dimensional fixed effects
+- IV, difference-in-differences, regression discontinuity (Carlson & Dell, 2025)
+
+**Software**: `ppi-python` in Python, and the `dsl` package in R
+
+---
+### DSL for correcting a right-hand side variable
+
+In the Stockholm regression, the predicted variable is a *regressor*. 
+Call it $Z_i$ (sex), with outcome $Y_i$ (log income) observed for everyone
+
+DSL then replaces each ingredient of the OLS slope by a pseudo outcome
+
+\begin{align*}
+    \tilde{Z}_i &:= f(X_i) + \frac{R_i}{\pi}\left( Z_i - f(X_i) \right) & \text{Predicted values for } Z_i
+    \\
+    \widetilde{Z_i^2} &:= f(X_i)^2 + \frac{R_i}{\pi}\left( Z_i^2 - f(X_i)^2 \right) & \text{Predicted values for } Z_i^2
+    \\
+    \widetilde{Z_iY_i} &:= f(X_i) Y_i + \frac{R_i}{\pi}\left( Z_i Y_i - f(X_i) Y_i \right) & \text{Predicted values for } Z_iY_i,
+\end{align*}
 
 --
 
-.pull-left-wide[
-Source criticism comes before the codebook. Document the rules, the disagreements, and who did the coding.
+Once we have our pseudo outcomes, the DSL estimator of the slope is
 
-**ML complements the careful historian. It does not replace them.**
+\begin{align*}
+    \hat{\beta}_{\text{DSL}} = \frac{\frac{1}{N}\sum_{i = 1}^N \widetilde{Z_iY_i} - (\frac{1}{N}\sum_{i = 1}^N \tilde{Z}_i)(\frac{1}{N}\sum_{i = 1}^N Y_i)}{\frac{1}{N}\sum_{i = 1}^N \widetilde{Z_i^2} - (\frac{1}{N}\sum_{i = 1}^N \tilde{Z}_i)^2},
+\end{align*}
+
+---
+
+**TODO show how to do previous simple mean exercise with the ppi-python package**
+
+---
+
+## Why this matters especially for us
+
+.pull-left-wide[
+<img src="Figures/accuracy_f1_over_time_openai.png" alt="Classifier performance by period of linguistic style" style="width:100%;">
+]
+
+.pull-right-narrow[
+.small123[
+Take 200 texts with human emotion labels. Have an LLM rewrite each one in the English of a given period, then score them all with the same BERT classifier
+
+On the original text: accuracy 0.82, macro F1 0.67
+
+By 1200: accuracy 0.37
+
+Note that LLM-rewritten prose is *easier* than a genuine historical source. This understates the problem
+]
 ]
 
 ---
-## Beyond a mean
+## Even frontier models
 
 .pull-left-wide[
-The same logic reaches much further:
-
-- Predictions on the **right-hand side** of a regression, which is the Stockholm case
-- Regression coefficients generally: linear, logistic, Poisson
-- High-dimensional fixed effects
-- IV, difference-in-differences, regression discontinuity
+<img src="Figures/llm_vs_human_accuracy_f1.png" alt="LLM versus human labels on seventeenth century text" style="width:100%;">
 ]
+
+.pull-right-narrow[
+.small123[
+200 paragraphs of real seventeenth-century English (EEBO), labelled by a frontier LLM and, independently, by us
+
+Accuracy looks excellent: a macro average of 0.94
+
+F1 is 0.69 overall, and 0.60 for irony
+]
+]
+
+---
+## Historical sources are the hard case
+
+- Almost every tool is pre-trained on **modern** text
+- Models project present-day categories onto the past, and archaic syntax is simply harder
+- So errors correlate with **period, language, region and genre**
 
 --
 
-.pull-left-wide[
-Software: `ppi-python` in Python, and the `dsl` package in R. Both wrap around **any** black-box model, with no retraining required.
-]
+Those are the covariates in our regressions. The errors are systematic in precisely the direction that biases our estimates
+
+*If you work with historical sources, you are in the regime where debiasing matters most*
 
 ---
 ## Where it applies, and where it does not
@@ -987,40 +1069,20 @@ Software: `ppi-python` in Python, and the `dsl` package in R. Both wrap around *
 ]
 
 ---
-# .red[Exercise 3: Fixing the Stockholm estimate]
+# .red[Exercise: Fixing the Stockholm estimate]
 
-.pull-left-wide[
 Back to the regression you broke in Exercise 1. The 330 rows with `R == 1` are your gold standard.
 
 1. Estimate the gap using **only** those 330 rows
 2. Now apply the correction, using all 3,271 predictions
 3. Compare all four estimates against the true value of $-0.822$
-]
 
---
-
-.pull-left-wide[
-| Estimator | Estimate | 95% CI |
-|---|---|---|
-| Naive | âˆ’0.713 | [âˆ’0.767, âˆ’0.658] |
-| Gold standard only | âˆ’0.760 | [âˆ’0.908, âˆ’0.612] |
-| Debiased | âˆ’0.814 | [âˆ’0.909, âˆ’0.719] |
-| Oracle | âˆ’0.822 | [âˆ’0.871, âˆ’0.774] |
-]
 
 ---
 ## What to take away
 
-.pull-left-wide[
 1. Every ML output is a **prediction**, and its errors are systematic rather than random
 2. **No performance score** detects the resulting bias in your estimate
-3. A small **random** sample of hand-coded labels lets you measure that bias and subtract it
-4. Validity comes from the **sampling design**; the model only buys precision
+3. A small **random** sample of hand-coded labels lets you measure that bias and correct it
+4. Validity comes from the **sampling design** - the ML model only buys precision
 5. This covers most of what economic history does with ML
-]
-
---
-
-.pull-left-wide[
-**Better models do not remove the need for research design. They make good research design more valuable.**
-]
