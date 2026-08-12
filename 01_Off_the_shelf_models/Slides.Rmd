@@ -115,7 +115,7 @@ class: middle
 .pull-left-wide[
 **Taking the plunge into using some of the tools.**
 
-- Balance between showing *what* can be done and *how* to do it — more towards *how*
+- Balance between showing *what* can be done and *how* to do it - more towards *how*
 - The first bit should be fine for everyone to follow along, but difficulty increases between now and the end of tomorrow
 - Some of it will be hard, but this is an advanced class
 ]
@@ -711,12 +711,12 @@ Errors in our setting
 
 --
 
-The misclassification sits almost entirely in one class. 
+The misclassification sits almost entirely in one class.
 It does not average out, and it pushes the coefficient in one direction
 
 --
 
-Egami et al. (2024): precision above 90-95% can still produce bias large enough to **flip the sign** of a coefficient
+Egami et al. (2024): precision above 90–95% can still produce bias large enough to **flip the sign** of a coefficient
 
 ---
 class: inverse, middle, center
@@ -771,14 +771,14 @@ $$\widehat{\text{bias}} = \frac{1}{n}\sum_{i=1}^{n}\big(f(X_i) - Y_i\big)$$
 
 --
 
-We can now combined this bias correction with our full set of ML predictions
+We can now combine this bias correction with our full set of ML predictions
 
 $$\hat{\theta}_{\text{DB}} = \frac{1}{N - n} \sum_{i = n + 1}^N f(X_i) - \underbrace{\frac{1}{n} \sum_{i = 1}^n \left( f(X_i) - Y_i \right)}_{\text{Bias correction term}}$$
 
 ---
 ## Debiasing frameworks
 
-The two most prominent methods of using debiasing is **prediction-powered inference** (PPI; Angelopoulos et al., 2023) and design-based supervised learning (DSL; Egami et al., 2023, 2024).
+The two most prominent methods for debiasing are **prediction-powered inference** (PPI; Angelopoulos et al., 2023) and design-based supervised learning (DSL; Egami et al., 2023, 2024).
 On the previous slide, we used PPI for debiasing
 
 --
@@ -814,7 +814,7 @@ A weak model costs you precision, not unbiasedness
 ---
 # .red[Exercise: Estimation of a mean]
 
-Let $X_i \sim U(0,1)$ and $Y_i = 2X_i$, so the true mean is $\theta = 1$. 
+Let $X_i \sim U(0,1)$ and $Y_i = 2X_i$, so the true mean is $\theta = 1$.
 Use the deliberately imperfect predictor $f(X_i) = 2.1 X_i - 0.5 X_i^2$
 
 1. Generate a random sample of size $N = 1000$ according to the above data generating process (DGP). Remove $Y_i$ from 90% of the sample
@@ -839,36 +839,36 @@ dgp_true = function(N, pi) {
 
 ml_predictor = function(X) {
   Y_pred = 2.1 * X - 0.5 * X^2
-  
+
   return(Y_pred)
 }
 
 estimator_gs = function(data) {
   theta_hat_gs = mean(data[data$R == 1, 'Y'])
-  
+
   theta_hat_gs_se = sd(data[data$R == 1, 'Y']) / sqrt(sum(data$R))
-  
+
   return(c(theta_hat_gs, theta_hat_gs_se))
 }
 
 estimator_ml = function(data) {
   theta_hat_ml = mean(data$Y_pred)
-  
+
   theta_hat_ml_se = sd(data$Y_pred) / sqrt(NROW(data))
-  
+
   return(c(theta_hat_ml, theta_hat_ml_se))
 }
 
 estimator_ppi = function(data) {
   data_gs = data[data$R == 1, ]
   data_ml = data[data$R == 0, ]
-  
+
   residuals = data_gs$Y_pred - data_gs$Y
-  
+
   theta_hat_ppi = mean(data_ml$Y_pred) - mean(residuals)
-  
+
   theta_hat_ppi_se = sqrt(var(residuals) / NROW(data_gs) + var(data_ml$Y_pred) / NROW(data_ml))
-  
+
   return(c(theta_hat_ppi, theta_hat_ppi_se))
 }
 
@@ -889,12 +889,12 @@ for (rep in 1:num_simulations) {
   est_and_se_gs = estimator_gs(data)
   estimates[rep, 1] = est_and_se_gs[1]
   std_errs[rep, 1] = est_and_se_gs[2]
-  
+
   # Naively using ML predictions
   est_and_se_ml = estimator_ml(data)
   estimates[rep, 2] = est_and_se_ml[1]
   std_errs[rep, 2] = est_and_se_ml[2]
-  
+
   # PPI
   est_and_se_ppi = estimator_ppi(data)
   estimates[rep, 3] = est_and_se_ppi[1]
@@ -980,7 +980,7 @@ While the mathematics get slightly more complicated, the core idea behind debias
 ---
 ### DSL for correcting a right-hand side variable
 
-In the Stockholm regression, the predicted variable is a *regressor*. 
+In the Stockholm regression, the predicted variable is a *regressor*.
 Call it $Z_i$ (sex), with outcome $Y_i$ (log income) observed for everyone
 
 DSL then replaces each ingredient of the OLS slope by a pseudo outcome
@@ -1107,7 +1107,7 @@ print(f"DSL gap: {dsl_gap(d):.3f}")
 ```
 
 ---
-## Using DSL to correct out estimate
+## Using DSL to correct our estimate
 
 .center[
 <img src="Figures/stockholm_dsl_coefplot.png" alt="Gender wage gap estimates, Stockholm 1920" style="width:92%;">

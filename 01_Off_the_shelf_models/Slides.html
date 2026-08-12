@@ -125,7 +125,7 @@ class: middle
 .pull-left-wide[
 **Taking the plunge into using some of the tools.**
 
-- Balance between showing *what* can be done and *how* to do it — more towards *how*
+- Balance between showing *what* can be done and *how* to do it - more towards *how*
 - The first bit should be fine for everyone to follow along, but difficulty increases between now and the end of tomorrow
 - Some of it will be hard, but this is an advanced class
 ]
@@ -718,12 +718,12 @@ Errors in our setting
 
 --
 
-The misclassification sits almost entirely in one class. 
+The misclassification sits almost entirely in one class.
 It does not average out, and it pushes the coefficient in one direction
 
 --
 
-Egami et al. (2024): precision above 90-95% can still produce bias large enough to **flip the sign** of a coefficient
+Egami et al. (2024): precision above 90–95% can still produce bias large enough to **flip the sign** of a coefficient
 
 ---
 class: inverse, middle, center
@@ -778,14 +778,14 @@ We can thus simply measure the bias:
 
 --
 
-We can now combined this bias correction with our full set of ML predictions
+We can now combine this bias correction with our full set of ML predictions
 
 `$$\hat{\theta}_{\text{DB}} = \frac{1}{N - n} \sum_{i = n + 1}^N f(X_i) - \underbrace{\frac{1}{n} \sum_{i = 1}^n \left( f(X_i) - Y_i \right)}_{\text{Bias correction term}}$$`
 
 ---
 ## Debiasing frameworks
 
-The two most prominent methods of using debiasing is **prediction-powered inference** (PPI; Angelopoulos et al., 2023) and design-based supervised learning (DSL; Egami et al., 2023, 2024).
+The two most prominent methods for debiasing are **prediction-powered inference** (PPI; Angelopoulos et al., 2023) and design-based supervised learning (DSL; Egami et al., 2023, 2024).
 On the previous slide, we used PPI for debiasing
 
 --
@@ -821,7 +821,7 @@ A weak model costs you precision, not unbiasedness
 ---
 # .red[Exercise: Estimation of a mean]
 
-Let `\(X_i \sim U(0,1)\)` and `\(Y_i = 2X_i\)`, so the true mean is `\(\theta = 1\)`. 
+Let `\(X_i \sim U(0,1)\)` and `\(Y_i = 2X_i\)`, so the true mean is `\(\theta = 1\)`.
 Use the deliberately imperfect predictor `\(f(X_i) = 2.1 X_i - 0.5 X_i^2\)`
 
 1. Generate a random sample of size `\(N = 1000\)` according to the above data generating process (DGP). Remove `\(Y_i\)` from 90% of the sample
@@ -888,7 +888,7 @@ While the mathematics get slightly more complicated, the core idea behind debias
 ---
 ### DSL for correcting a right-hand side variable
 
-In the Stockholm regression, the predicted variable is a *regressor*. 
+In the Stockholm regression, the predicted variable is a *regressor*.
 Call it `\(Z_i\)` (sex), with outcome `\(Y_i\)` (log income) observed for everyone
 
 DSL then replaces each ingredient of the OLS slope by a pseudo outcome
@@ -1016,7 +1016,7 @@ Load in the Stockholm wage data from the file `Stockholm1920.csv`. Then:
 
 
 ---
-## Using DSL to correct out estimate
+## Using DSL to correct our estimate
 
 .center[
 &lt;img src="Figures/stockholm_dsl_coefplot.png" alt="Gender wage gap estimates, Stockholm 1920" style="width:92%;"&gt;
