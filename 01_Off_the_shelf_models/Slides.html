@@ -628,13 +628,13 @@ We typically measure the performance of a regressor using either:
 
 
 ```
-##   first_name log_labor_income female female_pred R
-## 1       carl         8.716044     NA           0 0
-## 2       anna         8.151910     NA           1 0
-## 3       emil         8.276395     NA           0 0
-## 4    alfhild         7.313220     NA           0 0
-## 5      greta         7.377759      0           1 1
-## 6      alena         7.313220      0           0 1
+##          first_name log_labor_income female female_pred female_pred_binary R
+## 1        Carl Allan         8.716044     NA   0.1199224                  0 0
+## 2   Anna Margaretha         8.151910     NA   0.9847535                  1 0
+## 3         Emil Olof         8.276395     NA   0.1045823                  0 0
+## 4 Alfhild Charlotta         7.313220     NA   0.5000000                  0 0
+## 5    Greta Elisabet         7.377759      0   0.6205167                  1 1
+## 6    Alena Carolina         7.313220      0   0.5000000                  0 1
 ```
 
 --
@@ -652,12 +652,13 @@ How often do we correctly predict someone is female?
 ---
 # .red[Exercise: Gender wage gap]
 
-**TODO** refer to notebook
-
+Load in the Stockholm wage data from the file `Stockholm1920.csv`. Then:
 1. For observations where you observe the actual sex, compute the accuracy, precision, recall, and `\(F_1\)`-score of the predicted genders
-2. Regress `log_labor_income` on `female_pred` using **all** observations. What is the estimated gender wage gap?
+2. Regress `log_labor_income` on `female_pred_binary` using **all** observations. What is the estimated gender wage gap?
 3. Regress `log_labor_income` on `female` using observations where gender is observed. What is the estimated gender wage gap?
 4. Which estimate do you trust the most?
+
+**Hint**: Consider using the notebook **TODO**
 
 
 
@@ -698,7 +699,7 @@ Let us compare our two estimates as well as the "truth"
 ]
 
 .small123[
-Dashed line: the "true" gap. Solid line: no gap at all. Bars are 95% confidence intervals.
+Dashed line: the "true" gap. Solid line: no gap at all. Bars are 95% confidence intervals
 ]
 
 ---
@@ -827,6 +828,8 @@ Use the deliberately imperfect predictor `\(f(X_i) = 2.1 X_i - 0.5 X_i^2\)`
 2. Compute all three estimators from the last few slides (options 1-3)
 3. Repeat 1,000 times and plot the three distributions. Which is the best estimator?
 
+**Hint**: Consider using the notebook **TODO**
+
 
 
 ---
@@ -907,8 +910,62 @@ Once we have our pseudo outcomes, the DSL estimator of the slope is
 \end{align*}`
 
 ---
+## Using `ppi-python`
 
-**TODO show how to do previous simple mean exercise with the ppi-python package**
+Let us generate a single draw according to the previous exercise's DGP
+
+
+``` python
+import numpy as np
+
+from ppi_py import ppi_mean_pointestimate, ppi_mean_ci
+
+rng = np.random.default_rng(42)
+
+N, pi = 1000, 0.1
+
+X = rng.uniform(size = N)
+Y = 2 * X
+R = rng.binomial(1, pi, size = N)
+
+Y_pred = 2.1 * X - 0.5 * X**2
+```
+
+---
+## Using `ppi-python`
+
+
+``` python
+Y_gs = Y[R == 1]
+Y_pred_gs = Y_pred[R == 1]
+Y_pred_ml = Y_pred[R == 0]
+
+theta = ppi_mean_pointestimate(Y_gs, Y_pred_gs, Y_pred_ml)
+lo, hi = ppi_mean_ci(Y_gs, Y_pred_gs, Y_pred_ml, alpha = 0.05)
+theta, lo, hi = [np.asarray(v).item() for v in (theta, lo, hi)]
+
+print(f"PPI: {theta:.3f}  [{lo:.3f}, {hi:.3f}]")
+```
+
+```
+PPI: 0.994  [0.956, 1.032]
+```
+
+``` python
+print(f"Naive: {Y_pred.mean():.3f}")
+```
+
+```
+Naive: 0.878
+```
+
+``` python
+print(f"Gold: {Y_gs.mean():.3f}")
+```
+
+```
+Gold: 1.005
+```
 
 ---
 
@@ -939,7 +996,7 @@ Note that LLM-rewritten prose is *easier* than a genuine historical source. This
 
 .pull-right-narrow[
 .small123[
-200 paragraphs of real seventeenth-century English (EEBO), labelled by a frontier LLM and, independently, by us
+200 paragraphs of real seventeenth-century English (EEBO), labelled by a frontier LLM (ChatGPT 5.5) and, independently, by us
 
 Accuracy looks excellent: a macro average of 0.94
 
@@ -948,55 +1005,35 @@ F1 is 0.69 overall, and 0.60 for irony
 ]
 
 ---
-## Historical sources are the hard case
-
-- Almost every tool is pre-trained on **modern** text
-- Models project present-day categories onto the past, and archaic syntax is simply harder
-- So errors correlate with **period, language, region and genre**
-
---
-
-Those are the covariates in our regressions. The errors are systematic in precisely the direction that biases our estimates
-
-*If you work with historical sources, you are in the regime where debiasing matters most*
-
----
-## Where it applies, and where it does not
-
-.pull-left-wide[
-**Type 1, ML replaces a human annotator.** Classification, linking, labeling. A gold standard can always be built, so this always works. *Most of what the field does.*
-]
-
---
-
-.pull-left-wide[
-**Type 2, ML fills in genuinely missing data.** Works if you can validate within the source.
-]
-
---
-
-.pull-left-wide[
-**Type 3, ML builds a new measure.** No human could produce the label, so there is no gold standard and no debiasing. Validate against multiple proxies and placebo tests instead.
-]
-
----
 # .red[Exercise: Fixing the Stockholm estimate]
 
-Back to the regression you broke in Exercise 1. The 330 rows with `R == 1` are your gold standard.
+Load in the Stockholm wage data from the file `Stockholm1920.csv`. Then:
+1. Use DSL as shown previously to obtain a debiased version of the gender wage gap estimate
+1. Compare with the results from the previous exercise. Which is the best estimate?
 
-1. Estimate the gap using **only** those 330 rows
-2. Now apply the correction, using all 3,271 predictions
-3. Compare all four estimates against the true value of `\(-0.822\)`
+**Hint**: Consider using the notebook **TODO**
 
+
+
+---
+## Using DSL to correct out estimate
+
+.center[
+&lt;img src="Figures/stockholm_dsl_coefplot.png" alt="Gender wage gap estimates, Stockholm 1920" style="width:92%;"&gt;
+]
+
+.small123[
+Dashed line: the "true" gap. Solid line: no gap at all. Bars are 95% confidence intervals
+]
 
 ---
 ## What to take away
 
-1. Every ML output is a **prediction**, and its errors are systematic rather than random
-2. **No performance score** detects the resulting bias in your estimate
-3. A small **random** sample of hand-coded labels lets you measure that bias and correct it
+1. Every ML output is a prediction and its errors are systematic rather than random
+2. Standard performance scores do not detect the resulting bias in your estimate
+3. A small **random** sample of hand-coded "gold standard" labels lets you measure the bias and correct it
 4. Validity comes from the **sampling design** - the ML model only buys precision
-5. This covers most of what economic history does with ML
+5. This covers much of what economic history does with ML
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
