@@ -821,7 +821,7 @@ Use the deliberately imperfect predictor $f(X_i) = 2.1 X_i - 0.5 X_i^2$
 2. Compute all three estimators from the last few slides (options 1-3)
 3. Repeat 1,000 times and plot the three distributions. Which is the best estimator?
 
-**Hint**: Consider using the notebook **TODO**
+**Hint**: Consider using this Colab notebook to get started: https://colab.research.google.com/drive/1vqQLGcDtViuZhcm6GmytBxexqHdK-9Vj?usp=sharing
 
 ```{r, echo = FALSE, eval = FALSE}
 
@@ -1083,7 +1083,7 @@ Load in the Stockholm wage data from the file `Stockholm1920.csv`. Then:
 1. Use DSL as shown previously to obtain a debiased version of the gender wage gap estimate
 1. Compare with the results from the previous exercise. Which is the best estimate?
 
-**Hint**: Consider using the notebook **TODO**
+**Hint**: Consider using this Colab notebook to get started: **TODO**
 
 ```{python stockholm-dsl-py, comment = "", cache = FALSE, echo = FALSE, eval = FALSE}
 import numpy as np, pandas as pd
