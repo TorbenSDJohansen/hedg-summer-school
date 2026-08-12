@@ -638,7 +638,7 @@ Load in the Stockholm wage data from the file `Stockholm1920.csv`. Then:
 3. Regress `log_labor_income` on `female` using observations where gender is observed. What is the estimated gender wage gap?
 4. Which estimate do you trust the most?
 
-**Hint**: Consider using the notebook **TODO**
+**Hint**: Consider using this Colab notebook to get started: https://colab.research.google.com/drive/1oU5c9SZ9geUFAxU4hfPMU7SoN7D66No-?usp=sharing
 
 ```{r exercise-gap-solution, echo = FALSE, eval = FALSE}
 cm <- table(predicted = stockholm$female_pred_binary, actual = stockholm$female)
