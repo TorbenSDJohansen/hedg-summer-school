@@ -109,23 +109,23 @@ class: center, inverse, middle
 ### Lecture 2: From tokens to transcription
 
 Torben Skov Dyg Johansen ([tsdj@sam.sdu.dk](mailto:tsdj@sam.sdu.dk))
-Assistant Professor of Econometrics and Data Science at SDU
+Assistant Professor of Econometrics and Data Science
 [torbensdjohansen.github.io](https://torbensdjohansen.github.io/)
 
 Christian Vedel ([christian-vs@sam.sdu.dk](mailto:christian-vs@sam.sdu.dk))
 Assistant Professor of Economic History
 [christianvedels.github.io](https://christianvedels.github.io/)
 
-### Updated 2026-08-12
+### Updated 2026-08-13
 
 ---
 class: middle
 # Today's lecture
 
 .pull-left-wide[
-**Yesterday we ran advanced ML pipelines off the shelf. Today we look under the hood, and build our own.**
+**Yesterday we ran advanced ML pipelines off the shelf and looked at debiasing. Today we look under the hood, and build our own ML models.**
 
-- **Tokens and embedding space:** a conceptual framework to understand machine learning
+- **Neural networks for text**
 - **Introduction to OccCANINE:** how to use it and how to build something similar (a neural network for text classification)
 - **Transcription:** how to run transcription on scanned documents using LLMs
 ]
@@ -139,8 +139,6 @@ class: middle
 
 .pull-left-wide[
 **Language**
-1. Tokenization: representing text as numbers
-2. Text embeddings
 3. Neural networks for text data
 4. Text classification from scratch
 
@@ -157,7 +155,7 @@ class: inverse, middle, center
 # Neural networks for text
 
 .pull-left-wide[
-We now know how to represent text as numerical data suitable for modelling. Our next objective is to learn *how* to model text data
+In Julius' lectures, you have learned how to represent text as numerical data suitable for modelling. Our next objective is to learn *how* to model text data
 
 One key observation is that text is somewhat similar to time series data, in that a clear *sequential* structure is present: the meaning of a word depends on its context, i.e. how it is embedded in a sentence
 
@@ -171,19 +169,23 @@ Let's take a look at RNNs
 ---
 ## A recurrent cell of a neural network
 
+.pull-right-narrow[
+&lt;img src="Figures/figure_6-9.png" style="width:100%;"&gt;
+.small123[*Source*: Deep Learning with Python by Francois Chollet (ISBN10: 9781617294433)]
+]
+
 .pull-left-wide[
 We have not yet specified the type of recurrent connection, just that it has the form
 
 `$$y_t = f(x_t, y_{t - 1})$$`
-
-We can think of an autoregressive linear model with covariates as one example
-
-`$$y_t = \alpha y_{t - 1} + \beta f_t$$`
 ]
 
-.pull-right-narrow[
-&lt;img src="Figures/figure_6-9.png" style="width:100%;"&gt;
-.tiny123[*Source*: Deep Learning with Python by Francois Chollet (ISBN10: 9781617294433)]
+--
+
+.pull-left-wide[
+We can think of an autoregressive linear model with covariates as one example
+
+`$$y_t = \alpha y_{t - 1} + \beta x_t$$`
 ]
 
 ---
@@ -197,7 +199,7 @@ Usually, a recurrent neural network looks something like the image below — i.e
 &lt;img src="Figures/Recurrent_neural_network_unfold.svg" style="height:280px;"&gt;
 ]
 
-.tiny123[*Source*: fdeloche - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=60109157]
+.small123[*Source*: fdeloche - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=60109157]
 
 ---
 ## Long-term dependencies
@@ -221,7 +223,7 @@ The most commonly used architectures/"layers" are:
 &lt;img src="Figures/Long_Short-Term_Memory.svg" style="height:400px;"&gt;
 ]
 
-.tiny123[*Source*: fdeloche - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=60149410]
+.small123[*Source*: fdeloche - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=60149410]
 
 ---
 ## Gated Recurrent Unit (GRU)
@@ -230,7 +232,7 @@ The most commonly used architectures/"layers" are:
 &lt;img src="Figures/Gated_Recurrent_Unit.svg" style="height:400px;"&gt;
 ]
 
-.tiny123[*Source*: fdeloche - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=60466441]
+.small123[*Source*: fdeloche - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=60466441]
 
 ---
 class: inverse, middle, center
@@ -376,7 +378,6 @@ Combining these allows us to build a HISCO classifier "from scratch" which, when
 ---
 ### Building a character-level tokenizer
 
-.pull-left-wide[
 .tiny123[
 
 ``` python
@@ -392,6 +393,7 @@ CHARS_IN_TOYDATA = [' ', '"', "'", '(', ')', '*', '+', ',', '-', '.', '/', '0', 
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
     'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '¢', '£', '©', '¬', 'Â',
     'Ã', 'â', 'œ', 'š', 'ž', '‚', '„', '€']
+
 MAP_CHAR_IDX = {
     char: idx for idx, char in enumerate(CHARS_IN_TOYDATA, start=2)
 }
@@ -402,7 +404,6 @@ def tokenize(hisco: str, max_len: int) -&gt; list[int]:
     encoded += [1] * (max_len - len(encoded))
     return encoded
 ```
-]
 ]
 
 ---
@@ -441,7 +442,6 @@ tokenize('iron works labourer', 20)  # longer example
 ---
 ### Building a HISCO dataset
 
-.pull-left-wide[
 .small123[
 
 ``` python
@@ -465,29 +465,26 @@ class HISCODataset(Dataset):
         return package
 ```
 ]
-]
 
 ---
 ### Loading the data
 
-.pull-left-wide[
 
 ``` python
 import os
+import pandas as pd
 from dirs import DATA_DIR
 
 train_data = pd.read_csv(os.path.join(DATA_DIR, 'toy_data_train.csv'))
 train_data.head(3)
 ```
-.small123[
+
 ```
-                      occ1  label
-0      iron works labourer   1915
-1  fireman midland railway   1885
-2   ironstone mine foreman    513
+##                       occ1  label
+## 0      iron works labourer   1915
+## 1  fireman midland railway   1885
+## 2   ironstone mine foreman    513
 ```
-]
-]
 
 --
 
@@ -497,20 +494,16 @@ train_data.head(3)
 train_dataset = HISCODataset(train_data)
 train_dataset[0]
 ```
-.tiny123[
+
 ```
-{'occ1': 'iron works labourer',
- 'encoded': tensor([39, 48, 45, 44,  2, 53, 45, 48, 41, 49,  2, 42, 31, 32, 45, 51, 48, 35,
-         48,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1]),
- 'label': tensor(1915)}
+## {'occ1': 'iron works labourer', 'encoded': tensor([39, 48, 45, 44,  2, 53, 45, 48, 41, 49,  2, 42, 31, 32, 45, 51, 48, 35,
+##         48,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1]), 'label': tensor(1915)}
 ```
-]
 ]
 
 ---
 ### So which HISCO code does the label 1915 refer to?
 
-.pull-left-wide[
 
 ``` python
 from histocc import DATASETS
@@ -521,14 +514,13 @@ map_label_hisco = {v: k for k, v in map_hisco_label.items()}
 
 map_label_hisco[1915]
 ```
+
 ```
-99910
+## np.int64(99910)
 ```
-]
 
 --
 
-.pull-left-wide[
 *...and some other examples...*
 
 ``` python
@@ -536,21 +528,18 @@ for description, label in train_data.head(5).values:
     hisco = map_label_hisco[label]
     print(f'"{description}" has label {label} -&gt; HISCO: {hisco}')
 ```
-.small123[
+
 ```
-"iron works labourer" has label 1915 -&gt; HISCO: 99910
-"fireman midland railway" has label 1885 -&gt; HISCO: 98330
-"ironstone mine foreman" has label 513 -&gt; HISCO: 22610
-"engineer fitter and turner" has label 1321 -&gt; HISCO: 83320
-"carpenter deceased" has label 1751 -&gt; HISCO: 95410
+## "iron works labourer" has label 1915 -&gt; HISCO: 99910
+## "fireman midland railway" has label 1885 -&gt; HISCO: 98330
+## "ironstone mine foreman" has label 513 -&gt; HISCO: 22610
+## "engineer fitter and turner" has label 1321 -&gt; HISCO: 83320
+## "carpenter deceased" has label 1751 -&gt; HISCO: 95410
 ```
-]
-]
 
 ---
 ## Data loaders
 
-.pull-left-wide[
 With our dataset class, we can build data loaders, which are wrappers around our dataset responsible for creating a **batch** of data
 
 ``` python
@@ -562,13 +551,12 @@ test_dataset = HISCODataset(test_data)
 train_data_loader = DataLoader(train_dataset, batch_size=32)
 test_data_loader = DataLoader(test_dataset, batch_size=32)
 ```
-]
 
 ---
 ### Building a HISCO classifier
 
-.pull-left-wide[
 **Goal**: given an occupational description, provide its associated HISCO code
+
 .small123[
 
 ``` python
@@ -589,13 +577,12 @@ class HISCOClassifier(nn.Module):
         return out
 ```
 ]
-]
 
 ---
 ## Model, loss, and optimizer
 
-.pull-left-wide[
 We can now instantiate our **model**; we also need an objective (or **loss**) function and an **optimizer**
+
 .small123[
 
 ``` python
@@ -614,12 +601,10 @@ loss_fn = torch.nn.CrossEntropyLoss()
 optimizer = torch.optim.AdamW(model.parameters(), lr=0.01)
 ```
 ]
-]
 
 ---
 ### Building a training loop
 
-.pull-left-wide[
 We now train our model by iteratively:
 1. Draw a **batch** of descriptions and labels
 2. Make our model *predict* the labels given the descriptions
@@ -640,12 +625,10 @@ def train_epoch(model, optimizer, data_loader, loss_fn):
 
         optimizer.step()                    # update network parameters
 ```
-]
 
 ---
 ### Building an evaluation loop
 
-.pull-left-wide[
 Ultimately, we want to evaluate our model in terms of how often it correctly predicts a HISCO code given an occupational description
 
 ``` python
@@ -662,12 +645,10 @@ def evaluate(model, data_loader):
 
     return total_correct / total_count  # calculate accuracy
 ```
-]
 
 ---
 ### Training our HISCO classifier
 
-.pull-left-wide[
 We now train our model by looping over the training data 10 times
 
 ``` python
@@ -676,27 +657,21 @@ for epoch in range(1, 11):
     acc = evaluate(model, test_data_loader)
     print(f'Trained for {epoch} epochs. Validation accuracy: {100 * acc:.1f}%')
 ```
-]
 
---
+```
+## Trained for 1 epochs. Validation accuracy: 64.6%
+## Trained for 2 epochs. Validation accuracy: 67.9%
+## Trained for 3 epochs. Validation accuracy: 70.4%
+## Trained for 4 epochs. Validation accuracy: 72.9%
+## Trained for 5 epochs. Validation accuracy: 73.3%
+## Trained for 6 epochs. Validation accuracy: 72.2%
+## Trained for 7 epochs. Validation accuracy: 74.0%
+## Trained for 8 epochs. Validation accuracy: 72.6%
+## Trained for 9 epochs. Validation accuracy: 73.6%
+## Trained for 10 epochs. Validation accuracy: 73.4%
+```
 
-.pull-left-wide[
-.small123[
-```
-Trained for 1 epochs. Validation accuracy: 63.4%
-Trained for 2 epochs. Validation accuracy: 69.3%
-Trained for 3 epochs. Validation accuracy: 69.9%
-Trained for 4 epochs. Validation accuracy: 72.0%
-Trained for 5 epochs. Validation accuracy: 71.7%
-Trained for 6 epochs. Validation accuracy: 72.5%
-Trained for 7 epochs. Validation accuracy: 72.3%
-Trained for 8 epochs. Validation accuracy: 72.7%
-Trained for 9 epochs. Validation accuracy: 72.3%
-Trained for 10 epochs. Validation accuracy: 72.8%
-```
-]
 *if we were to always predict the most common class, we would only achieve 10% accuracy*
-]
 
 ---
 # .red[Exercise: Experimenting with your own HISCO classifier]
