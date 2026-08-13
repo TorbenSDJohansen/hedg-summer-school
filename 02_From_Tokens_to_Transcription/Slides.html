@@ -83,6 +83,11 @@ class: center, inverse, middle
   font-size: 0.40em;
 }
 
+.xtiny-code .remark-code {
+  font-size: 12px;
+  line-height: 1.2;
+}
+
 .small123 {
   font-size: 0.80em;
 }
@@ -764,7 +769,7 @@ Large-scale, high-quality datasets
 ## Performance: Dates
 
 .center[
-&lt;img src="Figures/dc-dates.PNG" style="height:280px;"&gt;
+&lt;img src="Figures/dc-dates.PNG" style="height:240px;"&gt;
 ]
 
 .small123[
@@ -774,8 +779,8 @@ Large-scale, high-quality datasets
 | ML ('19) | 90.5 | 96.0 | 97.0 | 97.2 |
 | Crowd sourcing | 96.3 | 98.3 | 98.7 | 98.8 |
 | ML ('22) | 97.7 | 99.2 | 99.0 | 99.2 |
-| GPT-4o Mini | 80.0 | | | |
-| Gemini-Flash 2.0 | 85.0 | | | |
+| GPT-4o Mini | 77.9 | | | |
+| Gemini-Flash 2.0 | 85.3 | | | |
 
 Transcription Accuracy (%). "Out-of-the-box" performance refers to *Transkribus* ([readcoop.eu/transkribus](https://readcoop.eu/transkribus/)).
 ]
@@ -807,8 +812,6 @@ CER = Character Error Rate, SER = Sequence Error Rate. Transcription accuracy (%
 ---
 ## What *is* possible? Machine-written documents
 
-.pull-left-wide[
-.tiny123[
 | Year and State/country | Rep't No. | Number and sex of employees | Hours of work per week | Rates of wages per day ($) |
 |---|---|---|---|---|
 | 1887 Ill | 298 | 9 (a) | (a) | 5.26-5.26-5.26 |
@@ -825,8 +828,6 @@ CER = Character Error Rate, SER = Sequence Error Rate. Transcription accuracy (%
 | 1897 Md. | 265 | 1 (a) | 60-60-60 | 2.10-2.10-2.10 |
 | 1898 Ind | 230 | 96 (a) | h 48-72-62 | 2.35-4.48-3.49 |
 | 1898 Mo | 306 | 10 (a) | 60-60-60 | 3.50-7.83-5.75 |
-]
-]
 
 ---
 ## Machine-written documents — errors
@@ -836,10 +837,9 @@ CER = Character Error Rate, SER = Sequence Error Rate. Transcription accuracy (%
 ]
 
 ---
+class: xtiny-code
 ## How to Use LLMs for Large-Scale Transcription
 
-.pull-left-wide[
-.tiny123[
 ```
 The image shows one or multiple tables. Each table contains the five columns:
 - Year and State or country.
@@ -872,23 +872,19 @@ The output for a row might look like:
     "Table title": "ACCORDION MAKERS"
 }
 ```
-]
+
+---
+## How to Use LLMs for Large-Scale Transcription
+
+We do **not** want to use the graphical interface when working with large collections (tedious and worse). Instead, we use an `API`
+
+.center[
+&lt;img src="Figures/gemini.png" style="height:120px;"&gt;
 ]
 
 ---
 ## How to Use LLMs for Large-Scale Transcription
 
-.pull-left-wide[
-We do **not** want to use the graphical interface when working with large collections (tedious and worse). Instead, we use an `API`
-]
-
-.center[
-&lt;img src="Figures/gemini.png" style="height:320px;"&gt;
-]
-
---
-
-.pull-left-wide[
 In Python, this could be in the form of a script like:
 .small123[
 
@@ -914,12 +910,10 @@ transcription = model.generate_content(
 )
 ```
 ]
-]
 
 ---
 ## How to Use LLMs for Large-Scale Transcription
 
-.pull-left-wide[
 .tiny123[
 ```
 [
@@ -944,7 +938,6 @@ transcription = model.generate_content(
 ```
 ]
 .small123[The model transcribes every row of every table in the image — here, 41 rows across multiple occupational categories, in a single structured pass]
-]
 
 ---
 # .red[Exercise: Transcription]
