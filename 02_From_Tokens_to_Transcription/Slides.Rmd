@@ -263,7 +263,7 @@ class: inverse, middle, center
 ### Performance
 
 .center[
-![Performance by language](Figures/Performance_by_lang_greedy.png)
+<img src="Figures/Performance_by_lang_greedy.png" alt="Performance by language" style="height:480px;">
 ]
 
 ---
@@ -276,14 +276,14 @@ We *encode* a conceptual understanding into an embedding space and *decode* it i
 ]
 
 .center[
-![t-SNE](Figures/Plot_tsne_2d.png)
+<img src="Figures/Plot_tsne_2d.png" alt="t-SNE" style="height:380px;">
 ]
 
 ---
 ## How to use it
 
 .pull-left-wide[
-- All of this is repeated [here on YouTube](https://youtu.be/BF_oNe-sABQ?si=7jIkjYedj9rooein) and [here in a step-by-step guide](https://github.com/christianvedels/OccCANINE/blob/main/GETTING_STARTED.md)
+- All of this is repeated [here in a step-by-step guide](https://github.com/christianvedels/OccCANINE/blob/main/GETTING_STARTED.md)
 - Entrypoint: [github.com/christianvedels/OccCANINE](https://github.com/christianvedels/OccCANINE)
 ]
 
@@ -349,7 +349,7 @@ result = model.predict(
 ## Setup and use
 
 .pull-left-wide[
-We will go over this notebook: [github.com/christianvedels/OccCANINE/blob/main/OccCANINE_colab.ipynb](https://github.com/christianvedels/OccCANINE/blob/main/OccCANINE_colab.ipynb)
+We will go over this notebook: [github.com/christianvedels/OccCANINE/blob/main/demonstration.ipynb](https://github.com/christianvedels/OccCANINE/blob/main/demonstration.ipynb)
 ]
 
 ---
@@ -452,7 +452,7 @@ import pandas as pd
 from dirs import DATA_DIR
 
 train_data = pd.read_csv(os.path.join(DATA_DIR, 'toy_data_train.csv'))
-train_data.head(3)
+print(train_data.head(3))
 ```
 
 --
@@ -874,13 +874,20 @@ Let's try to train our own transcription model. You can find this exercise as a 
 ]
 
 ---
-# Before next time
+# Summary: Day 1 & 2
 
-.pull-left[
-- Review today's notebooks and finish any exercises you didn't get to
-- Explore the OccCANINE and transcription repositories linked throughout the slides
+.pull-left-wide[
+**Day 1: Off-the-shelf models & debiasing**
+- Running pre-trained models via the HuggingFace `pipeline` interface, for both vision and text
+- Every model output is a prediction, not an observation
+- Debiasing (PPI, DSL) corrects predictions using a small gold-standard sample
+
+**Day 2: From tokens to transcription**
+- Neural networks for text: RNNs, LSTM, GRU
+- Building a text classifier from scratch: *OccCANINE*
+- Transcription: handwritten text recognition and LLMs for OCR
 ]
 
-.pull-right[
+.pull-right-narrow[
 ![Trees](Figures/Trees1.jpg)
 ]

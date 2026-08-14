@@ -121,7 +121,7 @@ Christian Vedel ([christian-vs@sam.sdu.dk](mailto:christian-vs@sam.sdu.dk))
 Assistant Professor of Economic History
 [christianvedels.github.io](https://christianvedels.github.io/)
 
-### Updated 2026-08-13
+### Updated 2026-08-14
 
 ---
 class: middle
@@ -273,7 +273,7 @@ class: inverse, middle, center
 ### Performance
 
 .center[
-![Performance by language](Figures/Performance_by_lang_greedy.png)
+&lt;img src="Figures/Performance_by_lang_greedy.png" alt="Performance by language" style="height:480px;"&gt;
 ]
 
 ---
@@ -286,14 +286,14 @@ We *encode* a conceptual understanding into an embedding space and *decode* it i
 ]
 
 .center[
-![t-SNE](Figures/Plot_tsne_2d.png)
+&lt;img src="Figures/Plot_tsne_2d.png" alt="t-SNE" style="height:380px;"&gt;
 ]
 
 ---
 ## How to use it
 
 .pull-left-wide[
-- All of this is repeated [here on YouTube](https://youtu.be/BF_oNe-sABQ?si=7jIkjYedj9rooein) and [here in a step-by-step guide](https://github.com/christianvedels/OccCANINE/blob/main/GETTING_STARTED.md)
+- All of this is repeated [here in a step-by-step guide](https://github.com/christianvedels/OccCANINE/blob/main/GETTING_STARTED.md)
 - Entrypoint: [github.com/christianvedels/OccCANINE](https://github.com/christianvedels/OccCANINE)
 ]
 
@@ -360,7 +360,7 @@ result = model.predict(
 ## Setup and use
 
 .pull-left-wide[
-We will go over this notebook: [github.com/christianvedels/OccCANINE/blob/main/OccCANINE_colab.ipynb](https://github.com/christianvedels/OccCANINE/blob/main/OccCANINE_colab.ipynb)
+We will go over this notebook: [github.com/christianvedels/OccCANINE/blob/main/demonstration.ipynb](https://github.com/christianvedels/OccCANINE/blob/main/demonstration.ipynb)
 ]
 
 ---
@@ -481,7 +481,7 @@ import pandas as pd
 from dirs import DATA_DIR
 
 train_data = pd.read_csv(os.path.join(DATA_DIR, 'toy_data_train.csv'))
-train_data.head(3)
+print(train_data.head(3))
 ```
 
 ```
@@ -664,16 +664,16 @@ for epoch in range(1, 11):
 ```
 
 ```
-## Trained for 1 epochs. Validation accuracy: 64.6%
-## Trained for 2 epochs. Validation accuracy: 67.9%
-## Trained for 3 epochs. Validation accuracy: 70.4%
-## Trained for 4 epochs. Validation accuracy: 72.9%
-## Trained for 5 epochs. Validation accuracy: 73.3%
-## Trained for 6 epochs. Validation accuracy: 72.2%
-## Trained for 7 epochs. Validation accuracy: 74.0%
-## Trained for 8 epochs. Validation accuracy: 72.6%
-## Trained for 9 epochs. Validation accuracy: 73.6%
-## Trained for 10 epochs. Validation accuracy: 73.4%
+## Trained for 1 epochs. Validation accuracy: 62.5%
+## Trained for 2 epochs. Validation accuracy: 66.8%
+## Trained for 3 epochs. Validation accuracy: 69.0%
+## Trained for 4 epochs. Validation accuracy: 72.1%
+## Trained for 5 epochs. Validation accuracy: 73.7%
+## Trained for 6 epochs. Validation accuracy: 74.2%
+## Trained for 7 epochs. Validation accuracy: 72.6%
+## Trained for 8 epochs. Validation accuracy: 73.2%
+## Trained for 9 epochs. Validation accuracy: 75.1%
+## Trained for 10 epochs. Validation accuracy: 74.0%
 ```
 
 *if we were to always predict the most common class, we would only achieve 10% accuracy*
@@ -950,14 +950,21 @@ Let's try to train our own transcription model. You can find this exercise as a 
 ]
 
 ---
-# Before next time
+# Summary: Day 1 &amp; 2
 
-.pull-left[
-- Review today's notebooks and finish any exercises you didn't get to
-- Explore the OccCANINE and transcription repositories linked throughout the slides
+.pull-left-wide[
+**Day 1: Off-the-shelf models &amp; debiasing**
+- Running pre-trained models via the HuggingFace `pipeline` interface, for both vision and text
+- Every model output is a prediction, not an observation
+- Debiasing (PPI, DSL) corrects predictions using a small gold-standard sample
+
+**Day 2: From tokens to transcription**
+- Neural networks for text: RNNs, LSTM, GRU
+- Building a text classifier from scratch: *OccCANINE*
+- Transcription: handwritten text recognition and LLMs for OCR
 ]
 
-.pull-right[
+.pull-right-narrow[
 ![Trees](Figures/Trees1.jpg)
 ]
     </textarea>
