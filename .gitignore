@@ -165,5 +165,14 @@ dirs.py
 Figures/kaggle_survey_2022_responses.csv
 hedg-summer-school.Rproj
 .virtual_documents/
-Exercise_solutions/
 .Rhistory
+
+# Machine-specific reticulate/conda config - do not commit, each
+# collaborator's conda install lives at a different path.
+.Renviron
+
+# knitr chunk cache (from cache=TRUE in Slides.Rmd) - local build
+# artifact, regenerates automatically, shouldn't be committed.
+Slides_cache/
+/Tools
+/.vscode

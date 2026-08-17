@@ -1,0 +1,51 @@
+# Conda environment for the HEDG summer school slides and exercises.
+#
+# Create with:
+#   conda env create -f environment.yml
+#
+# Update after editing this file with:
+#   conda env update -f environment.yml --prune
+#
+# Used by both lecture decks via reticulate::use_condaenv("hedg-summer-school")
+# in Slides.Rmd, and by the exercises/ notebooks directly.
+#
+# If knitting fails with "Unable to find conda binary", reticulate can't
+# auto-discover your conda install. Fix by adding a `.Renviron` file next to
+# each Slides.Rmd (gitignored - this is machine-specific) containing:
+#   RETICULATE_CONDA=/path/to/your/conda/Scripts/conda.exe   (Windows)
+#   RETICULATE_CONDA=/path/to/your/conda/bin/conda            (macOS/Linux)
+name: hedg-summer-school
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - numpy
+  - pandas
+  - scikit-learn
+  - pillow
+  - matplotlib
+  - pip:
+      - torch
+      - transformers
+      # histocc isn't published to PyPI - install straight from GitHub
+      - git+https://github.com/christianvedels/OccCANINE.git
+      # histocc's own dependency list is incomplete - these are needed at
+      # import time (unidecode, seaborn, wandb) but not declared, so pip
+      # won't pull them in on its own.
+      - unidecode
+      - seaborn
+      - wandb
+      - google-generativeai
+      # torchtext is archived/unmaintained upstream and only used by
+      # embedding_illustration.py and the GloVe cells of the original
+      # slides_cv_version.ipynb (both reference-only, not slides or
+      # exercises that actually run). Its compiled extension (libtorchtext)
+      # only loads against the torch version it shipped with, and that's
+      # torch<=2.3 - incompatible with the torch>=2.4 that `transformers`
+      # requires above. If you need the GloVe demos to run, install
+      # torchtext in a SEPARATE env pinned to torch==2.3.* and
+      # torchtext==0.18.*; don't try to force it into this one.
+      # - torchtext
