@@ -4,8 +4,8 @@
 
 ## Slides
 
-- [Lecture 1: Off-the-shelf models](https://raw.githack.com/TorbenSDJohansen/hedg-summer-school/refs/heads/cv2026/01_Off_the_shelf_models/Slides.html)
-- [Lecture 2: From tokens to transcription](https://raw.githack.com/TorbenSDJohansen/hedg-summer-school/refs/heads/cv2026/02_From_Tokens_to_Transcription/Slides.html)
+- [Lecture 1: Off-the-shelf models](https://rawcdn.githack.com/TorbenSDJohansen/hedg-summer-school/refs/heads/main/01_Off_the_shelf_models/Slides.html)
+- [Lecture 2: From tokens to transcription](https://rawcdn.githack.com/TorbenSDJohansen/hedg-summer-school/refs/heads/main/02_From_Tokens_to_Transcription/Slides.html)
 
 (Links point at the `cv2026` branch while this content is in progress. Update the branch in the URL - or move these to `main` - once merged.)
 
