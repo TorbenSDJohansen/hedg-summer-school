@@ -277,6 +277,37 @@ results = model("Figures/arkivdk7055378.png")
 ]
 
 ---
+## Gorin, Heblich & Zylberberg — State of the Art
+
+.small123[
+NBER working paper: [www.nber.org/system/files/working_papers/w33976/w33976.pdf](https://www.nber.org/system/files/working_papers/w33976/w33976.pdf) — Paper website: [state.arteconlab.org](https://state.arteconlab.org/)
+]
+
+.panelset[
+.panel[.panel-name[Abstract]
+
+.center[
+<img src="Figures/Gorin, Heblich, Zylbergberg - State of the Art Abstract.png" alt="Abstract" style="height:420px;">
+]
+
+]
+.panel[.panel-name[Figure 3]
+
+.center[
+<img src="Figures/Gorin, Heblich, Zylbergberg - State of the Art Figure3.png" alt="Figure 3" style="height:420px;">
+]
+
+]
+.panel[.panel-name[Figure 6]
+
+.center[
+<img src="Figures/Gorin, Heblich, Zylbergberg - State of the Art Figure6.png" alt="Figure 6" style="height:420px;">
+]
+
+]
+]
+
+---
 class: inverse, middle, center
 # Demonstration 2: Natural Language Processing
 
